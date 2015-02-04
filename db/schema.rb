@@ -11,6 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150204102953) do
+
+  create_table "hotspots", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.float    "lat"
+    t.float    "lng"
+    t.text     "category"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
+    t.string   "aditionnal_image1_file_name"
+    t.string   "aditionnal_image1_content_type"
+    t.integer  "aditionnal_image1_file_size"
+    t.datetime "aditionnal_image1_updated_at"
+    t.string   "aditionnal_image2_file_name"
+    t.string   "aditionnal_image2_content_type"
+    t.integer  "aditionnal_image2_file_size"
+    t.datetime "aditionnal_image2_updated_at"
+  end
 
 end
