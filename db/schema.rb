@@ -11,22 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203143239) do
-
-  create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20150204082250) do
 
   create_table "hotspots", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.float    "lat"
     t.float    "lng"
+    t.text     "banner"
+    t.text     "aditionnnal_image1"
+    t.text     "aditionnnal_image2"
   end
 
   add_index "hotspots", ["category_id"], name: "index_hotspots_on_category_id"
