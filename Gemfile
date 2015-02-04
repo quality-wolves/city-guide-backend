@@ -43,5 +43,7 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'rmagick'
+gem 'fog'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'papercrop', github: 'rsantamaria/papercrop'

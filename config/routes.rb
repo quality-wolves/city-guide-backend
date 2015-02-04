@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :hotspots
+  get 'hotspots/:id/crop' => 'catalog#crop'
+
 
   get 'hotspots/:category' => 'hotspots#index'
 
