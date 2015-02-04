@@ -27,4 +27,7 @@
 //= require turbolinks
 //= require jquery.jcrop
 //= require papercrop
+//= require http://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyAxoiryjmQwmv615VRB1iOQgdospi0Qn7Q&amp;libraries=places&amp;sensor=false
+//= require_tree './md'
+//= require ./md/md-g-map-golocation-address-input
 //= require_tree .
