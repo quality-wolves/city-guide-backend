@@ -4,7 +4,11 @@ class HotspotsController < ApplicationController
   # GET /hotspots
   # GET /hotspots.json
   def index
-    @hotspots = Hotspot.all
+    if params[:category]
+      @hotspots = Hotspot.where(category: params[:category]).entries
+    else
+      @hotspots = Hotspot.all.entries
+    end
   end
 
   # GET /hotspots/1
