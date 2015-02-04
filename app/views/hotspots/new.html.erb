@@ -16,50 +16,32 @@
   <% end %>
   <p> 
     <%= f.label :image %><br>
-    <%= f.file_field :image %> 
+    <%= f.file_field :image%> 
   </p>
   <p>
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control input-medium' %>
   </p>
  
   <p>
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: 'form-control' %>
   </p>
-
-  <!-- <p>
-    <%= f.label :lat %><br>
-    <%= f.number_field :lat, :step => 'any' %>
-  </p>
-
-  <p>
-    <%= f.label :lng %><br>
-    <%= f.number_field :lng, :step => 'any' %>
-  </p> -->
-
   <p>
     <label>Address</label><br/>
     <input
       class="md-autocomplete-location form-control"
-      data-components="{
-      'latSelector':'[role=\'lat\']',
-      'lngSelector':'[role=\'lng\']',
-      }"
+      data-components='{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}'
       type="text"
       maxlength="512"
       autocomplete="off"/>
-      <div class="ya-autocomplete-wraper" style="position:relative">
-        <ul class="ya-geoautocomplete-vars" style="position: absolute; left: 0px; top: 0px; overflow: hidden; display: none;" type="none">
-        </ul>
-      </div>
       <%= f.hidden_field :lat, role: 'lat'%>
       <%= f.hidden_field :lng, role: 'lng'%>
   </p>
  
   <p>
-    <%= f.submit %>
+    <%= f.submit :class => 'btn btn-primary' %>
   </p>
 
 <% end %>
-<%= link_to 'Back', hotspots_path %>
+<%= link_to 'Back', hotspots_path, class: 'link' %>
