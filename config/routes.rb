@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   resources :hotspots
+  get 'hotspots/list/:category' => 'hotspots#list', :as => 'hotspots_list'
+
   get 'hotspots/:id/crop' => 'catalog#crop'
 
 
-  get 'hotspots/:category' => 'hotspots#index'
 
   root :to => 'hotspots#index'
 
