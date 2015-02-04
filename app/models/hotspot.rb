@@ -1,14 +1,34 @@
 class Hotspot < ActiveRecord::Base
+  include Paperclip::Glue
+  
   validates :name, :presence => true
-  validates :category, :presence => true
-
-  has_attached_file :banner, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
-  has_attached_file :additionnal_image1, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
-  has_attached_file :additionnal_image2, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
-
-  validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
-  validates_attachment_content_type :additionnal_image1, :content_type => /\Aimage\/.*\Z/
-  validates_attachment_content_type :additionnal_image2, :content_type => /\Aimage\/.*\Z/
+#  validates :category, :presence => true
 
   enum category: [ :stay, :eat, :buy, :drink, :see, :do]
+
+#crop params accessors
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
+#banner iamge processing
+  #validates :banner, :presence => true
+  
+  has_attached_file :banner, :styles => { :small => "100x100#", :large => "500x500>" }, :processors => [:cropper]
+  validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
+  
+  #after_update :reprocess_banner, :if => :cropping?
+  
+  def cropping?(param = nil)
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+  
+  def banner_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(banner.path(style))
+  end
+  
+  private
+    def reprocess_banner
+      banner.reprocess!
+    end
+
 end
