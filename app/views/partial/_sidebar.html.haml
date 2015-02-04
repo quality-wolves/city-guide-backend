@@ -1,0 +1,7 @@
+.page-sidebar-wrapper
+  .page-sidebar.navbar-collapse.collapse
+    %ul.page-sidebar-menu.page-sidebar-menu-hover-submenu{:data => {:keep => {:expanding => 'false'}, :auto => {:scroll => 'true'}, :slide => {:speed => '200'}}}
+      %li.start.active
+        = link_to root_path do
+          %i.icon-home
+          %span.title= 'Dashboard'

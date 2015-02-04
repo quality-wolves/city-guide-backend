@@ -1,0 +1,9 @@
+.page-header.navbar.navbar-fixed-top
+  .page-header-inner.container
+    .page-logo
+      = link_to '/' do
+        .logo-default{:style => 'text-decoration: none; color: white;font-size: 18px;margin: 0;line-height: 65px;'}= 'CITYGUIDE'
+      .menu-toggler.sidebar-toggler
+        = image_tag 'sidebar-toggler.png'
+      %a{:href => ';javascript', :class => 'menu-toggler responsive-toggler', :data => {:toggle => 'collapse', :target => '.navbar-collapse'}}
+    .page-top{:style => 'background: white; width: 100%;'}
