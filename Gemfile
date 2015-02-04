@@ -47,5 +47,4 @@ gem 'rmagick'
 gem 'fog'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'papercrop', github: 'rsantamaria/papercrop'
-
 gem 'haml'

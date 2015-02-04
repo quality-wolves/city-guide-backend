@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204102953) do
+ActiveRecord::Schema.define(version: 20150204152328) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -39,7 +39,14 @@ ActiveRecord::Schema.define(version: 20150204102953) do
     t.string   "aditionnal_image2_content_type"
     t.integer  "aditionnal_image2_file_size"
     t.datetime "aditionnal_image2_updated_at"
+<<<<<<< HEAD
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+=======
     t.text     "category"
+>>>>>>> c4ad62d6c62918e28c3157e3048ed3f2d3443ab3
   end
 
   add_index "hotspots", ["category_id"], name: "index_hotspots_on_category_id"

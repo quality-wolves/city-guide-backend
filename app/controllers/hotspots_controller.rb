@@ -35,12 +35,12 @@ class HotspotsController < ApplicationController
     @hotspot = Hotspot.new(hotspot_params)
 
     if @hotspot.save
-      if params[:hotspot][:banner].blank?
+      # if params[:hotspot][:banner].blank?
         flash[:notice] = "Successfully created hotspot."
         redirect_to @hotspot
-      else
-        render :action => "crop"
-      end
+      # else
+        # render :action => "crop"
+      # end
     else
       render :action => 'new'
     end
@@ -78,6 +78,6 @@ class HotspotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_params
-      params.require(:hotspot).permit(:banner, :name, :description, :lat, :lng)
+      params.require(:hotspot).permit(:image, :name, :description, :lat, :lng)
     end
 end
