@@ -10,9 +10,22 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require 'global/plugins/jquery.min.js'
+//= require 'global/plugins/jquery-migrate.min.js'
+//= require 'global/plugins/jquery-ui/jquery-ui.min.js'
+//= require 'global/plugins/bootstrap/js/bootstrap.min.js'
+//= require 'global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js'
+//= require 'global/plugins/jquery-slimscroll/jquery.slimscroll.min.js'
+//= require 'global/plugins/jquery.blockui.min.js'
+//= require 'global/plugins/jquery.cokie.min.js'
+//= require 'global/plugins/uniform/jquery.uniform.min.js'
+//= require 'global/plugins/bootstrap-switch/js/bootstrap-switch.min.js'
+//= require 'global/scripts/metronic.js'
+//= require 'admin/layout2/scripts/layout.js'
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.jcrop
 //= require papercrop
+//= require_tree './md'
 //= require_tree .

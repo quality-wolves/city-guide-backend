@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'haml'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
@@ -47,3 +47,4 @@ gem 'rmagick'
 gem 'fog'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'papercrop', github: 'rsantamaria/papercrop'
+gem 'haml'

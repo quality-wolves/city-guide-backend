@@ -1,0 +1,4 @@
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$quick-sidebar-bg-color\".\A         on line 684 of F:/WWW/keenthemes/metronic/v3.6.2/theme/sass/admin/layout2/themes/_base.scss\A         from line 115 of F:\WWW\keenthemes\metronic\v3.6.2\theme\sass\admin\layout2\themes\dark.scss"; }
