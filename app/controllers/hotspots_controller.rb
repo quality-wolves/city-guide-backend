@@ -9,6 +9,7 @@ class HotspotsController < ApplicationController
     else
       @hotspots = Hotspot.all.entries
     end
+    @categories = Hotspot.categories.keys
   end
 
   # GET /hotspots/1

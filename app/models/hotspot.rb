@@ -16,6 +16,23 @@ class Hotspot < ActiveRecord::Base
   validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
   
   #after_update :reprocess_banner, :if => :cropping?
+
+  def self.category_icon_class(category)
+    case category
+      when 'buy'
+        'fa fa-gift'
+      when 'stay'
+        'fa fa-home'
+      when 'eat'
+        'fa fa-smile-o'
+      when 'drink'
+        'fa fa-glass'
+      when 'see'
+        'fa fa-camera-retro'
+      when 'do'
+        'fa fa-car'
+    end
+  end
   
   def cropping?(param = nil)
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

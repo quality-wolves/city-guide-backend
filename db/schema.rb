@@ -13,14 +13,20 @@
 
 ActiveRecord::Schema.define(version: 20150204102953) do
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "hotspots", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.integer  "category_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.float    "lat"
     t.float    "lng"
-    t.text     "category"
     t.string   "banner_file_name"
     t.string   "banner_content_type"
     t.integer  "banner_file_size"
@@ -33,6 +39,9 @@ ActiveRecord::Schema.define(version: 20150204102953) do
     t.string   "aditionnal_image2_content_type"
     t.integer  "aditionnal_image2_file_size"
     t.datetime "aditionnal_image2_updated_at"
+    t.text     "category"
   end
+
+  add_index "hotspots", ["category_id"], name: "index_hotspots_on_category_id"
 
 end
