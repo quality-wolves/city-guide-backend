@@ -1,5 +1,5 @@
 class Hotspot < ActiveRecord::Base
-  belongs_to :category
   validates :name, :presence => true
   validates :category, :presence => true
+  enum category: [ :stay, :eat, :buy, :drink, :see, :do]
 end
