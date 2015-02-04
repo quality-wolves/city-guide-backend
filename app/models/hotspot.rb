@@ -34,6 +34,23 @@ class Hotspot < ActiveRecord::Base
         'fa fa-car'
     end
   end
+
+  def self.category_title(category)
+    case category
+      when 'buy'
+        'Buy'
+      when 'stay'
+        'Stay'
+      when 'eat'
+        'Eat'
+      when 'drink'
+        'Drink'
+      when 'see'
+        'See'
+      when 'do'
+        'Do'
+    end
+  end
   
   # def cropping?(param = nil)
   #   !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
