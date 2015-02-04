@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :hotspots
+  #resources :hotspots
   get 'hotspots/list/:category' => 'hotspots#list', :as => 'hotspots_list'
+  get 'hotspots/:category/new' => 'hotspots#new', :as => 'hotspots_new'
+  get 'hotspots/:category/:id/edit' => 'hotspots#edit', :as => 'hotspots_edit'
 
+  post 'hotspots' => 'hotspots#create'
+  patch 'hotspots' => 'hotspots#update'
   get 'hotspots/:id/crop' => 'catalog#crop'
 
 

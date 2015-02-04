@@ -1,4 +1,6 @@
-%h1= 'Hotspots'
+%h3.page-title
+  = Hotspot.category_title(params[:category])
+  %a{:style=>'float: right;',:class => 'btn primary blue left',:href => hotspots_new_path(params[:category])}= 'Add'
 .row.mix-grid.hotspots
   - @hotspots.each do |hotspot|
     .col-md-3.col-sm-4.mix.mix_all.category_1{:style => 'margin: 10px; position: relative;'}
