@@ -4,7 +4,11 @@ class HotspotsController < ApplicationController
   # GET /hotspots
   # GET /hotspots.json
   def index
-    @hotspots = Hotspot.all
+    if params[:category]
+      @hotspots = Hotspot.where(category: params[:category]).entries
+    else
+      @hotspots = Hotspot.all.entries
+    end
   end
 
   # GET /hotspots/1
@@ -21,33 +25,37 @@ class HotspotsController < ApplicationController
   def edit
   end
 
+  # GET /hotspots/1/crop
+  def crop
+  end
+
   # POST /hotspots
-  # POST /hotspots.json
   def create
     @hotspot = Hotspot.new(hotspot_params)
 
-    respond_to do |format|
-      if @hotspot.save
-        format.html { redirect_to @hotspot, notice: 'Hotspot was successfully created.' }
-        format.json { render :show, status: :created, location: @hotspot }
+    if @hotspot.save
+      if params[:hotspot][:banner].blank?
+        flash[:notice] = "Successfully created hotspot."
+        redirect_to @hotspot
       else
-        format.html { render :new }
-        format.json { render json: @hotspot.errors, status: :unprocessable_entity }
+        render :action => "crop"
       end
+    else
+      render :action => 'new'
     end
   end
 
   # PATCH/PUT /hotspots/1
-  # PATCH/PUT /hotspots/1.json
   def update
-    respond_to do |format|
-      if @hotspot.update(hotspot_params)
-        format.html { redirect_to @hotspot, notice: 'Hotspot was successfully updated.' }
-        format.json { render :show, status: :ok, location: @hotspot }
+    if @hotspot.update(hotspot_params)
+      if params[:hotspot][:banner].blank?
+        flash[:notice] = "Successfully update hotspot."
+        redirect_to @hotspot
       else
-        format.html { render :edit }
-        format.json { render json: @hotspot.errors, status: :unprocessable_entity }
+        render :action => "crop"
       end
+    else
+      render :action => 'edit'
     end
   end
 
@@ -69,6 +77,6 @@ class HotspotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_params
-      params[:hotspot]
+      params.require(:hotspot).permit(:banner, :name, :description, :lat, :lng)
     end
 end

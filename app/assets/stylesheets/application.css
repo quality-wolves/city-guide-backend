@@ -13,5 +13,7 @@
  *= require style-responsive
  *= require style
  *= require custom
+ *= require_tree .
  *= require_self
+ *= require jquery.jcrop
  */
