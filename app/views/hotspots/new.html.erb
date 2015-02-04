@@ -27,7 +27,7 @@
     <%= f.text_area :description %>
   </p>
 
-  <p>
+  <!-- <p>
     <%= f.label :lat %><br>
     <%= f.number_field :lat, :step => 'any' %>
   </p>
@@ -35,6 +35,25 @@
   <p>
     <%= f.label :lng %><br>
     <%= f.number_field :lng, :step => 'any' %>
+  </p> -->
+
+  <p>
+    <label>Address</label><br/>
+    <input
+      class="md-autocomplete-location form-control"
+      data-components="{
+      'latSelector':'[role=\'lat\']',
+      'lngSelector':'[role=\'lng\']',
+      }"
+      type="text"
+      maxlength="512"
+      autocomplete="off"/>
+      <div class="ya-autocomplete-wraper" style="position:relative">
+        <ul class="ya-geoautocomplete-vars" style="position: absolute; left: 0px; top: 0px; overflow: hidden; display: none;" type="none">
+        </ul>
+      </div>
+      <%= f.hidden_field :lat, role: 'lat'%>
+      <%= f.hidden_field :lng, role: 'lng'%>
   </p>
  
   <p>
