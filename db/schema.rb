@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204102953) do
+ActiveRecord::Schema.define(version: 20150204152328) do
 
   create_table "hotspots", force: :cascade do |t|
     t.string   "name"
@@ -33,6 +33,10 @@ ActiveRecord::Schema.define(version: 20150204102953) do
     t.string   "aditionnal_image2_content_type"
     t.integer  "aditionnal_image2_file_size"
     t.datetime "aditionnal_image2_updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end
