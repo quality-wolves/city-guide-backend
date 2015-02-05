@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'hotspots/:category/new' => 'hotspots#new', :as => 'hotspots_new'
   get 'hotspots/:category/:id/edit' => 'hotspots#edit', :as => 'hotspots_edit'
 
+  get 'hotspot/:id' => 'hotspots#snow', :as => 'hotspot'
+
+
   post 'hotspots' => 'hotspots#create'
   patch 'hotspots' => 'hotspots#update'
   get 'hotspots/:id/crop' => 'catalog#crop'
