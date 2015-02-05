@@ -5,22 +5,16 @@ class HotspotsController < ApplicationController
   # GET /hotspots.json
 
   def index
-    @categories = Hotspot.categories.keys
   end
 
   def list
-    if params[:category]
-      # @hotspots = Hotspot.where(category: params[:category]).entries
-      @hotspots = Hotspot.all.entries
-
-    else
-      @hotspots = Hotspot.all.entries
-    end
+    @hotspots = Hotspot.where(category: params[:category]).entries
   end
 
   # GET /hotspots/1
   # GET /hotspots/1.json
   def show
+    @hotspot = Hotspot.find(params[:id])
   end
 
   # GET /hotspots/new
@@ -42,7 +36,7 @@ class HotspotsController < ApplicationController
 
     if @hotspot.save
       # if params[:hotspot][:banner].blank?
-        flash[:notice] = "Successfully created hotspot."
+        flash[:notice] = sprintf("Successfully created %s.", @hotspot.category)
         redirect_to @hotspot
       # else
         # render :action => "crop"
@@ -56,7 +50,7 @@ class HotspotsController < ApplicationController
   def update
     if @hotspot.update(hotspot_params)
       if params[:hotspot][:banner].blank?
-        flash[:notice] = "Successfully update hotspot."
+        flash[:notice] = sprintf("Successfully update %s.", @hotspot.category)
         redirect_to @hotspot
       else
         render :action => "crop"
@@ -84,6 +78,6 @@ class HotspotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_params
-      params.require(:hotspot).permit(:image, :name, :description, :lat, :lng)
+      params.require(:hotspot).permit(:image, :category, :name, :description, :lat, :lng)
     end
 end
