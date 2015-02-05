@@ -1,7 +1,6 @@
-%h1=sprintf("New %s", params[:category].capitalize)
+%h1=sprintf("Edit %s", @hotspot.category.capitalize)
 .form
   =form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspots_path do |f|
-    = f.hidden_field :category, value: params[:category]
     .form-body  
       - @error = @hotspot.errors.any? && @hotspot.errors[:image].any? ? @hotspot.errors[:image] : ''
       %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
@@ -31,5 +30,5 @@
           = f.hidden_field :lat, role: 'lat'
           = f.hidden_field :lng, role: 'lng'
     .form-actions
-      = f.submit sprintf('Save %s',params[:category]), :class => 'btn blue'
-      = link_to 'Back', hotspots_path, class: 'btn default'
+      = f.submit sprintf('Update %s',@hotspot.category.capitalize), :class => 'btn blue'
+      = link_to 'Back', hotspot_path(@hotspot), class: 'btn default'
