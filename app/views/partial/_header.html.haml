@@ -6,4 +6,16 @@
       .menu-toggler.sidebar-toggler
         = image_tag 'sidebar-toggler.png'
       %a{:href => ';javascript', :class => 'menu-toggler responsive-toggler', :data => {:toggle => 'collapse', :target => '.navbar-collapse'}}
+    .page-actions
+      .btn-group
+        %button.btn.btn-circle.green-haze.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
+          %i.fa.fa-plus
+          %span.hidden-sm.hidden-xs= 'New Hotspot'
+          %i.fa.fa-angle-down
+        %ul.dropdown-menu{:role => 'menu'}
+          - for @category in Hotspot.categories
+            %li
+              = link_to hotspots_list_path(:category => @category) do
+                %i{:class => Hotspot.category_icon_class(@category)}
+                = @category.capitalize
     .page-top{:style => 'background: white; width: 100%;'}
