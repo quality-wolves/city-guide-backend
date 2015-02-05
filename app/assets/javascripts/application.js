@@ -28,4 +28,5 @@
 //= require jquery.jcrop
 //= require papercrop
 //= require_tree './md'
+//= require admin/header
 //= require_tree .
