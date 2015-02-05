@@ -1,4 +1,4 @@
-%h1=sprintf("Edit %s", @hotspot.category.capitalize)
+%h1=sprintf("Edit \"%s\" Hotspot", @hotspot.category.capitalize)
 .form
   =form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspots_path do |f|
     .form-body  
@@ -30,5 +30,5 @@
           = f.hidden_field :lat, role: 'lat'
           = f.hidden_field :lng, role: 'lng'
     .form-actions
-      = f.submit sprintf('Update %s',@hotspot.category.capitalize), :class => 'btn blue'
+      = f.submit 'Update', :class => 'btn blue'
       = link_to 'Back', hotspot_path(@hotspot), class: 'btn default'
