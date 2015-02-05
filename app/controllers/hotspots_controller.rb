@@ -49,7 +49,6 @@ class HotspotsController < ApplicationController
 
   # PATCH/PUT /hotspots/1
   def update
-    @hotspot = Hotspot.find(params[:id])
     if @hotspot.update(update_params)
       flash[:notice] = sprintf("Successfully update %s.", @hotspot.category)
       redirect_to @hotspot
@@ -61,10 +60,12 @@ class HotspotsController < ApplicationController
   # DELETE /hotspots/1
   # DELETE /hotspots/1.json
   def destroy
-    @hotspot.destroy
-    respond_to do |format|
-      format.html { redirect_to hotspots_url, notice: 'Hotspot was successfully destroyed.' }
-      format.json { head :no_content }
+    if @hotspot.destroy
+      flash[:notice] = sprintf("Successfully delete %s.", @hotspot.category)
+      redirect_to hotspots_list_path(@hotspot.category)
+    else
+      flash[:notice] = sprintf("Failure delete %s.", @hotspot.category)
+      redirect_to :back
     end
   end
 

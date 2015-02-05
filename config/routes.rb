@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'hotspots/list/:category' => 'hotspots#list', :as => 'hotspots_list'
   get 'hotspots/:category/new' => 'hotspots#new', :as => 'hotspots_new'
   get 'hotspots/:id/edit' => 'hotspots#edit', :as => 'hotspot_edit'
+  get 'hotspots/:id/destroy' => 'hotspots#destroy', :as => 'hotspot_destroy'
+  delete 'hotspots/:id' => 'hotspots#destroy'
 
   get 'hotspot/:id' => 'hotspots#show', :as => 'hotspot'
 
