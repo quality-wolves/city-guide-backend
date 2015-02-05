@@ -1,12 +1,12 @@
 .page-sidebar-wrapper
   .page-sidebar.navbar-collapse.collapse
     %ul.page-sidebar-menu.page-sidebar-menu-hover-submenu{:data => {:keep => {:expanding => 'false'}, :auto => {:scroll => 'true'}, :slide => {:speed => '200'}}}
-      %li.start.active
+      %li.start{:class => ('active' unless request.path != root_path)}
         = link_to root_path do
           %i.icon-home
           %span.title= 'Dashboard'
       - for @category in Hotspot.categories do
-        %li
+        %li{:class => ('active' unless params[:category] != @category)}
           = link_to hotspots_list_path(:category => @category) do
             %i{:class => Hotspot.category_icon_class(@category)}
             %span.title= @category.capitalize
