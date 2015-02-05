@@ -1,4 +1,4 @@
-<h1>New Hotspots</h1>
+<h1>New <%= params[:category].capitalize%></h1>
 <%= form_for :hotspot, :html => { :multipart => true }, url: hotspots_path do |f| %>
   
   <% if @hotspot.errors.any? %>
@@ -41,7 +41,7 @@
   </p>
  
   <p>
-    <%= f.submit :class => 'btn btn-primary' %>
+    <%= f.submit 'Save '.concat(params[:category].capitalize), :class => 'btn btn-primary' %>
   </p>
 
 <% end %>
