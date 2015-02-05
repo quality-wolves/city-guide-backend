@@ -49,13 +49,9 @@ class HotspotsController < ApplicationController
 
   # PATCH/PUT /hotspots/1
   def update
-    if @hotspot.update(hotspot_params)
-      if params[:hotspot][:banner].blank?
-        flash[:notice] = sprintf("Successfully update %s.", @hotspot.category)
-        redirect_to @hotspot
-      else
-        render :action => "crop"
-      end
+    if @hotspot.update(update_params)
+      flash[:notice] = sprintf("Successfully update %s.", @hotspot.category)
+      redirect_to @hotspot
     else
       render :action => 'edit'
     end
@@ -80,5 +76,9 @@ class HotspotsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_params
       params.require(:hotspot).permit(:image, :category, :name, :description, :lat, :lng)
+    end
+
+    def update_params
+      params.require(:hotspot).permit(:image, :name, :description, :lat, :lng)
     end
 end
