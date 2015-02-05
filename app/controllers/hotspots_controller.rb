@@ -49,6 +49,7 @@ class HotspotsController < ApplicationController
 
   # PATCH/PUT /hotspots/1
   def update
+    @hotspot = Hotspot.find(params[:id])
     if @hotspot.update(update_params)
       flash[:notice] = sprintf("Successfully update %s.", @hotspot.category)
       redirect_to @hotspot
