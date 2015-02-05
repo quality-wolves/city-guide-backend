@@ -31,8 +31,5 @@ module CityGuide
         :fog_directory => "", 
         :fog_host => "localhost"
         }
-    Paperclip.options[:command_path] = '/usr/local/bin/'
-    # Paperclip.options[:identify_path] = '/usr/bin/identify'
-    # Paperclip.options[:command_path] = "/usr/local/bin/"
   end
 end
