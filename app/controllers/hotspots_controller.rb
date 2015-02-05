@@ -24,6 +24,7 @@ class HotspotsController < ApplicationController
 
   # GET /hotspots/1/edit
   def edit
+    @hotspot = Hotspot.find(params[:id])
   end
 
   # GET /hotspots/1/crop
