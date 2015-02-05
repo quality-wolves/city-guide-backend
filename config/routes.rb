@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   #resources :hotspots
   get 'hotspots/list/:category' => 'hotspots#list', :as => 'hotspots_list'
   get 'hotspots/:category/new' => 'hotspots#new', :as => 'hotspots_new'
-  get 'hotspots/:category/:id/edit' => 'hotspots#edit', :as => 'hotspot_edit'
+  get 'hotspots/:id/edit' => 'hotspots#edit', :as => 'hotspot_edit'
 
   get 'hotspot/:id' => 'hotspots#show', :as => 'hotspot'
 
