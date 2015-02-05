@@ -5,7 +5,7 @@
         = link_to root_path do
           %i.icon-home
           %span.title= 'Dashboard'
-      - for @category in Hotspot.categories.keys do
+      - for @category in Hotspot.categories do
         %li
           = link_to hotspots_list_path(:category => @category) do
             %i{:class => Hotspot.category_icon_class(@category)}
