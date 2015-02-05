@@ -23,7 +23,7 @@
         .input-icon.right
           - if !@error.empty?
             %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
-          =f.text_area :description, class: 'form-control col-md-12'
+          =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
       .form-group
         %label='Address'
         .input-icon.right
