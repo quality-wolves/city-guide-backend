@@ -20,4 +20,5 @@
 *.sublime-project
 *.sublime-workspace
 public/hotspots/*
+public/assets/*
 config/environments/local.rb
