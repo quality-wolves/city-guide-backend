@@ -1,22 +1,9 @@
 class Hotspot < ActiveRecord::Base
   include Paperclip::Glue
-  
-  validates :name, :presence => true
-#  validates :category, :presence => true
 
-  enum category: [ :stay, :eat, :buy, :drink, :see, :do]
-
-#crop params accessors
-  # attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
-#banner iamge processing
-  #validates :banner, :presence => true
-  
-  has_attached_file :image, :styles => { :small => "100x100#", :medium => "275x275#" }
-  do_not_validate_attachment_file_type :image
-  # validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
-  
-  #after_update :reprocess_banner, :if => :cropping?
+  def self.categories 
+    [ 'stay', 'eat', 'buy', 'drink', 'see', 'do' ]
+  end
 
   def self.category_icon_class(category)
     case category
@@ -51,6 +38,23 @@ class Hotspot < ActiveRecord::Base
         'Do'
     end
   end
+  
+  validates :name, :presence => true
+  validates :category, 
+    :presence => true,
+    :inclusion => { :in => self.categories }
+
+#crop params accessors
+  # attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
+#banner iamge processing
+  #validates :banner, :presence => true
+  
+  has_attached_file :image, :styles => { :small => "100x100#", :medium => "275x275#" }
+  do_not_validate_attachment_file_type :image
+  # validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
+  
+  #after_update :reprocess_banner, :if => :cropping?
   
   # def cropping?(param = nil)
   #   !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
