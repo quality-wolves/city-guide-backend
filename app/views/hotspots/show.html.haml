@@ -6,7 +6,12 @@
       %a.btn.btn-default.btn-sm{href:hotspot_edit_path(@hotspot)}
         %i.fa.fa-pencil
         Edit
-      = link_to 'Back', hotspots_list_path(@hotspot.category), class: 'btn btn-default btn-sm'
+      %a.btn.btn-default.btn-sm{href:hotspot_destroy_path(@hotspot)}
+        %i.fa.fa-remove
+        Delete
+      %a.btn.btn-default.btn-sm{href:hotspots_list_path(@hotspot.category)}
+        %i.fa.fa-caret-left
+        Back
 .col-md-12.col-sm-4
   = image_tag @hotspot.image.url(:medium).gsub(/^\w+/, ''), class: 'col-md-3'
   %p.col-md-9=@hotspot.description

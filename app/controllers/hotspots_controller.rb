@@ -14,7 +14,6 @@ class HotspotsController < ApplicationController
   # GET /hotspots/1
   # GET /hotspots/1.json
   def show
-    @hotspot = Hotspot.find(params[:id])
   end
 
   # GET /hotspots/new
@@ -24,7 +23,6 @@ class HotspotsController < ApplicationController
 
   # GET /hotspots/1/edit
   def edit
-    @hotspot = Hotspot.find(params[:id])
   end
 
   # GET /hotspots/1/crop
@@ -49,13 +47,9 @@ class HotspotsController < ApplicationController
 
   # PATCH/PUT /hotspots/1
   def update
-    if @hotspot.update(hotspot_params)
-      if params[:hotspot][:banner].blank?
-        flash[:notice] = sprintf("Successfully update %s.", @hotspot.category)
-        redirect_to @hotspot
-      else
-        render :action => "crop"
-      end
+    if @hotspot.update(update_params)
+      flash[:notice] = sprintf("Successfully update %s.", @hotspot.category)
+      redirect_to @hotspot
     else
       render :action => 'edit'
     end
@@ -64,10 +58,12 @@ class HotspotsController < ApplicationController
   # DELETE /hotspots/1
   # DELETE /hotspots/1.json
   def destroy
-    @hotspot.destroy
-    respond_to do |format|
-      format.html { redirect_to hotspots_url, notice: 'Hotspot was successfully destroyed.' }
-      format.json { head :no_content }
+    if @hotspot.destroy
+      flash[:notice] = sprintf("Successfully delete %s.", @hotspot.category)
+      redirect_to hotspots_list_path(@hotspot.category)
+    else
+      flash[:notice] = sprintf("Failure delete %s.", @hotspot.category)
+      redirect_to :back
     end
   end
 
@@ -80,5 +76,9 @@ class HotspotsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_params
       params.require(:hotspot).permit(:image, :category, :name, :description, :lat, :lng)
+    end
+
+    def update_params
+      params.require(:hotspot).permit(:image, :name, :description, :lat, :lng)
     end
 end

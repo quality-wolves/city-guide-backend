@@ -22,11 +22,11 @@
         .input-icon.right
           - if !@error.empty?
             %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
-          =f.text_area :description, class: 'form-control col-md-12'
+          =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
       .form-group
         %label='Address'
         .input-icon.right
-          %input.md-autocomplete-location.form-control.col-md-12{ :dataComponents => '{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}', :type => 'text', :maxlength => '512', :autocomplete => 'off' }
+          %input.md-autocomplete-location.form-control.col-md-12{ :data => {:components => '{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}'}, :type => 'text', :maxlength => '512', :autocomplete => 'off' }
           = f.hidden_field :lat, role: 'lat'
           = f.hidden_field :lng, role: 'lng'
     .form-actions
