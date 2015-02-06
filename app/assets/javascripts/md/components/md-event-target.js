@@ -37,6 +37,6 @@
         this.events[eventName].exec( options || false );
     };
 
-    App.classes.MDEventTarget = EventTarget;
+    App.mdClasses.MDEventTarget = EventTarget;
 
-})( App.classes.MDCallbackChain );
+})( App.mdClasses.MDCallbackChain );

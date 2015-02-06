@@ -13,7 +13,7 @@
     'use strict';
     this.App = this;
     /**@namespace*/
-    this.App.classes = {};
+    this.App.mdClasses = {};
     /**@namespace*/
     this.App.widgets = {};
 }).call( this );
@@ -35,3 +35,10 @@
         } );
     }
 }).call( this );
+
+(function(){
+    App.ready = function(cb){
+        App.jQuery(App.document).ready(cb);
+        App.jQuery(App.document).on('page:load', cb);
+    };
+})();

@@ -8,7 +8,7 @@
 /*jsHint*/
 /*global App*/
 
-(function ( Callback ) {
+(function ( ) {
     'use strict';
 
     CallbackChain.extends( Array );
@@ -39,7 +39,7 @@
     };
 
     CallbackChain.prototype._createItem = function ( args ) {
-        return new Callback( args.length == 1 ? args[0] : args );
+        return new App.mdClasses.MDCallback( args.length == 1 ? args[0] : args );
     };
 
     CallbackChain.prototype.push = function () {
@@ -60,6 +60,6 @@
         return this;
     };
 
-    App.classes.MDCallbackChain = CallbackChain;
+    App.mdClasses.MDCallbackChain = CallbackChain;
 
-})( App.classes.MDCallback );
+})( );

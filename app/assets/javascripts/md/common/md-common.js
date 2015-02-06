@@ -247,7 +247,7 @@
         enumerable  : true,
         writable    : false,
         configurable: false,
-        value       : ['widgets', 'classes', 'helpers', 'callbacks', 'plugins','singleton']
+        value       : ['widgets', 'mdClasses', 'helpers', 'callbacks', 'plugins','singleton']
     } );
 
     App.entities.forEach( function ( item ) {

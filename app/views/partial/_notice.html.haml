@@ -1,3 +1,6 @@
--if notice
-  .note.note-success
-    %p=notice
+-if flash.key?(:notice) && !flash[:notice].nil?
+  .p{:id=>'notice',:style=>'display:none'}=flash[:notice]
+-if flash.key?(:alert) && !flash[:alert].nil?
+  .p{:id=>'alert',:style=>'display:none'}=flash[:alert]
+-if flash.key?(:error) && !flash[:error].nil?
+  .p{:id=>'error',:style=>'display:none'}=flash[:error]

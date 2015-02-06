@@ -7,7 +7,7 @@
  */
 /*jsHint*/
 /*global App*/
-(function ( $ ) {
+(function ( ) {
     'use strict';
     var componentForm = {
             street_number              : 'short_name',
@@ -87,10 +87,13 @@
     };
 
     App.widgets.AutocompleteInput = AutocompleteInput;
+})( );
 
-    $( App.document ).ready( function () {
-        $( '.md-autocomplete-location' ).each( function () {
-            new AutocompleteInput( $( this ) );
-        } );
-    } );
-})( App.jQuery );
+(function($){
+    $.mdAutocompleteAddress = $.createPlugin({
+        baseClass               : App.widgets.AutocompleteInput,
+        targetSelector          : '.md-autocomplete-location',
+        name                    : 'mdAutocompleteAddress',
+        dataKey                 : 'md-autocomplete-address',
+    });
+})(App.jQuery);
