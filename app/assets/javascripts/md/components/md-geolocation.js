@@ -27,8 +27,8 @@
             geolocation.clearWatch( watchId );
         },
         /**
-         * @param success {App.classes.MDCallback}
-         * @param fail {App.classes.MDCallback}
+         * @param success {App.mdClasses.MDCallback}
+         * @param fail {App.mdClasses.MDCallback}
          * */
         getCurrentPosition: function ( success, fail ) {
             geolocation.getCurrentPosition(
@@ -43,8 +43,8 @@
             );
         },
         /**
-         * @param success {App.classes.MDCallback}
-         * @param fail {App.classes.MDCallback}
+         * @param success {App.mdClasses.MDCallback}
+         * @param fail {App.mdClasses.MDCallback}
          * */
         watchPosition     : function ( success, fail ) {
             return geolocation.watchPosition(

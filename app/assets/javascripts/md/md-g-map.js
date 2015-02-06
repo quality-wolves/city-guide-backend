@@ -68,7 +68,7 @@
     };
 
     GMap.prototype.geocode = function ( options, callback ) {
-        callback = new App.classes.MDCallback( true, callback, this );
+        callback = new App.mdClasses.MDCallback( true, callback, this );
         geocoder.geocode( options, function ( result ) {
             callback.fnArgs = [result];
             callback.exec();
@@ -86,7 +86,7 @@
             this.attachEventListener(
                 marker,
                 eventName,
-                new App.classes.MDCallback( true, events[eventName], marker )
+                new App.mdClasses.MDCallback( true, events[eventName], marker )
             );
         }
     };
@@ -168,7 +168,7 @@
     GMap.prototype.showPopUp = function () {
         var citySelect = App.jQuery( this.options.citySelectPopUpTarget );
         citySelect.mdMDModalWindow( 'show' ).mdMDModalWindow( 'lock' );
-        var callback = new App.classes.MDCallback( true, function ( city ) {
+        var callback = new App.mdClasses.MDCallback( true, function ( city ) {
             var self = this;
             geocoder.geocode( {'address': city}, function ( result ) {
                 self.setCenter( result[0].geometry.location );

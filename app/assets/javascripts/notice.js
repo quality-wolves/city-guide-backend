@@ -1,5 +1,5 @@
 (function(){
-	$(document).ready(function(){
+	App.ready(function(){
 		toastr.options = {
 			"closeButton": true,
 			"debug":false,
