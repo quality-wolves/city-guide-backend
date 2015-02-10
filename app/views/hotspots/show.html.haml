@@ -2,13 +2,13 @@
   .portlet-title
     .caption= @hotspot.name
     .actions
-      %a.btn.btn-default.btn-sm{href:hotspot_edit_path(@hotspot)}
+      %a.btn.btn-default.btn-sm{href:edit_hotspot_path(@hotspot)}
         %i.fa.fa-pencil
         Edit
-      %a.btn.btn-default.btn-sm{href:hotspot_destroy_path(@hotspot)}
+      %a.btn.btn-default.btn-sm{href:destroy_hotspot_path(@hotspot)}
         %i.fa.fa-remove
         Delete
-      %a.btn.btn-default.btn-sm{href:hotspots_list_path(@hotspot.category)}
+      %a.btn.btn-default.btn-sm{href:list_hotspots_path(@hotspot.category)}
         %i.fa.fa-caret-left
         Back
 .col-md-12.col-sm-4

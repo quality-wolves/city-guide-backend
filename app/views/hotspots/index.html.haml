@@ -2,6 +2,6 @@
 .row.mix-grid.hotspots
   - for @category in Hotspot.categories
     .col-md-3.col-sm-4.mix.mix_all.category_1{:style => 'margin: 10px; position: relative;'}
-      = link_to hotspots_list_path(:category => @category) do
+      = link_to list_hotspots_path(:category => @category) do
         %span{:style => 'position: absolute; color: white; font-size: 24px; left: 30px; top: 10px; text-shadow: 1px 1px 2px black;'}= @category.capitalize
         = image_tag 'categories/' + @category + '.png', {:width => 259}
