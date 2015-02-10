@@ -60,7 +60,7 @@ class HotspotsController < ApplicationController
   def destroy
     if @hotspot.destroy
       flash[:notice] = sprintf("Successfully delete %s.", @hotspot.category)
-      redirect_to hotspots_list_path(@hotspot.category)
+      redirect_to list_hotspots_path(@hotspot.category)
     else
       flash[:notice] = sprintf("Failure delete %s.", @hotspot.category)
       redirect_to :back
