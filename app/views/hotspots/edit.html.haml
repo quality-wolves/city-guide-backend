@@ -1,7 +1,6 @@
 %h3.page-title
   =sprintf("Edit \"%s\" Hotspot", @hotspot.category.capitalize)
-.form
-  =form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspots_path do |f|
+  =form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspot_path(@hotspot), method: :patch do |f|
     .form-body  
       - @error = @hotspot.errors.any? && @hotspot.errors[:image].any? ? @hotspot.errors[:image] : ''
       %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
