@@ -21,5 +21,5 @@
         this._defaultOptions = App.extend( true, {}, this._super._defaultOptions, options );
     };
 
-    App.widgets.MDWidget = Widget;
+    App.mdWidgets.MDWidget = Widget;
 })( App.jQuery );

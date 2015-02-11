@@ -20,7 +20,7 @@
         geometryComponents = ['lat', 'lng'],
         api = App.google.maps;
 
-    AutocompleteInput.extends( App.widgets.MDWidget );
+    AutocompleteInput.extends( App.mdWidgets.MDWidget );
 
     function AutocompleteInput( jQ, options ) {
         AutocompleteInput.super( this, 'constructor', jQ, options );
@@ -86,12 +86,12 @@
         this.$.trigger( 'change' );
     };
 
-    App.widgets.AutocompleteInput = AutocompleteInput;
+    App.mdWidgets.AutocompleteInput = AutocompleteInput;
 })( );
 
 (function($){
     $.mdAutocompleteAddress = $.createPlugin({
-        baseClass               : App.widgets.AutocompleteInput,
+        baseClass               : App.mdWidgets.AutocompleteInput,
         targetSelector          : '.md-autocomplete-location',
         name                    : 'mdAutocompleteAddress',
         dataKey                 : 'md-autocomplete-address',

@@ -29,7 +29,7 @@
 
         var plugin = new Plugin( pluginSettings );
         $.fn[pluginSettings.name] = plugin.createFn( $ );
-        $[pluginSettings.name] = plugin.createManager();
+        App.mdPlugins[pluginSettings.name] = $[pluginSettings.name] = plugin.createManager();
 
         pluginSettings.afterReady = pluginSettings.afterReady ||
                                     pluginSettings.targetSelector &&

@@ -14,7 +14,7 @@
     var api = google.maps;
     var geocoder = new api.Geocoder();
 
-    GMap.extends( App.widgets.MDWidget );
+    GMap.extends( App.mdWidgets.MDWidget );
 
     function GMap( jQ, options ) {
         GMap.super( this, 'constructor', jQ, options );
@@ -209,6 +209,6 @@
         }
     } );
 
-    App.widgets.GMap = GMap;
+    App.mdWidgets.GMap = GMap;
 
 })();

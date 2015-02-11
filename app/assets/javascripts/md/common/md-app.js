@@ -12,10 +12,6 @@
 (function () {
     'use strict';
     this.App = this;
-    /**@namespace*/
-    this.App.mdClasses = {};
-    /**@namespace*/
-    this.App.widgets = {};
 }).call( this );
 
 (function () {
