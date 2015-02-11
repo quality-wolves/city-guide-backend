@@ -4,17 +4,12 @@
 	$.createPlugin({
         baseClass               : function (jQ,options){
             App.mdPlugins.geolocationMapController.settings.baseClass.super( this, 'constructor', jQ, options );
-        	this.map = new App.mdWidgets.GMap(this.$);
-        	App.setTimeout( function (self) {
-                console.log(self.map);
-        		self.autocomplete = new App.mdWidgets.AutocompleteInput(self.map.$searchInput.find('.form-control'));
-        	}, 550, this);
         }.extends( App.getWidgetsOfAlias('MDWidget') ),
         targetSelector          : '.map-wrapper',
         name                    : 'geolocationMapController',
         dataKey                 : 'geolocationMap',
         onAfterGetCurrentPosition : function ( position ) {
-            this.setCenter( new google.maps.LatLng( position.coords.latitude, position.coords.longitude ) );
+            this.map.setCenter( new google.maps.LatLng( position.coords.latitude, position.coords.longitude ) );
         },
         onFailGetCurrentPosition:function(){
         	alert();
@@ -22,13 +17,67 @@
     });
 
     App.mdPlugins.geolocationMapController.onAfterCommand( 'create', function ( widget, options ) {
-        // widget.$.on( 'change-center', this.onAfterSetCenter );
-        // widget.listenMap( 'idle', this.lazyCompaniesSort );
-        // this.renderCity( widget );
         App.geolocation.getCurrentPosition(
-            new App.mdClasses.MDCallback( true, this.onAfterGetCurrentPosition, widget.map ),
-            new App.mdClasses.MDCallback( true, this.onFailGetCurrentPosition, widget.map )
+            new App.mdClasses.MDCallback( true, this.onAfterGetCurrentPosition, widget ),
+            new App.mdClasses.MDCallback( true, this.onFailGetCurrentPosition, widget )
         );
+        widget.
+            initCallbacks().
+            initMap().
+            initAutocomplete();
     } );
 
 })(App.jQuery);
+
+(function( prototype ){
+
+    prototype.initCallbacks = function(){
+        this.onAfterGocode = new App.mdClasses.MDCallback( true, this.onAfterGocode, this );
+        this.onMarkerDragEnd = new App.mdClasses.MDCallback( true, this.onMarkerDragEnd, this );
+        return this;
+    };
+
+    prototype.initMap = function(){
+        this.map = new App.mdWidgets.GMap(this.$);
+        this.map.listenMap('click', this.onClickMap, this );
+        return this;
+    };
+
+    prototype.initAutocomplete = function(){
+        App.setTimeout( function (self) {
+            self.autocomplete = new App.mdWidgets.AutocompleteInput(self.map.$searchInput.find('.form-control'));
+            self.autocomplete.$.on('place_changed',{self:self},self.onPlaceChanged);
+        }, 550, this);
+        return this;
+    };
+
+    prototype.updateMarker = function( latLng ){
+        this.marker = this.marker || this.map.setMarker({
+            position: latLng,
+            draggable: true
+        },{
+            dragend: this.onMarkerDragEnd
+        });
+        this.marker.setPosition(latLng)
+        this.map.setCenter(latLng);
+    };
+    
+    prototype.onMarkerDragEnd = function( e ){
+        this.map.geocode( {location: e.latLng}, this.onAfterGocode );
+    };
+
+    prototype.onPlaceChanged = function( e ){
+        var self = e.data.self;
+        self.updateMarker( self.autocomplete.getLocation() );
+    };
+
+    prototype.onClickMap = function( map, e, controller ){
+        controller.updateMarker( e.latLng );
+        controller.map.geocode( {location: e.latLng}, controller.onAfterGocode );
+    };
+
+    prototype.onAfterGocode = function( result ){
+        this.autocomplete.setPlace(result[0]);
+    };
+
+})( App.mdPlugins.geolocationMapController.settings.baseClass.prototype );
