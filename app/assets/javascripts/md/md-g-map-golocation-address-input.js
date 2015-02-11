@@ -61,7 +61,24 @@
     };
 
     AutocompleteInput.prototype.fillInAddress = function ( ) {
-        var place = this.autocomplete.getPlace(), i;
+        this.setPlace(this.autocomplete.getPlace());
+        this.trigger();
+    };
+
+    AutocompleteInput.prototype.trigger = function(){
+        for ( var i in this.components ) {
+            this.components[i].trigger( 'change' );
+        }
+        this.$.trigger( 'place_changed' );
+    };
+
+    AutocompleteInput.prototype.getLocation = function(){
+        return this.place && this.place.geometry.location || null;
+    };
+
+    AutocompleteInput.prototype.setPlace = function(place){
+        var i;
+        this.place = place;
 
         for ( i = 0; i < place.address_components.length; i++ ) {
             var addressType = place.address_components[i].types[0];
@@ -76,15 +93,8 @@
                 this.components[i].val( place.geometry.location[i]() );
             }
         }
-        this.trigger();
-    };
-
-    AutocompleteInput.prototype.trigger = function(){
-        for ( var i in this.components ) {
-            this.components[i].trigger( 'change' );
-        }
-        this.$.trigger( 'change' );
-    };
+        place.formatted_address && this.$.val(place.formatted_address);
+    };    
 
     App.mdWidgets.AutocompleteInput = AutocompleteInput;
 })( );
