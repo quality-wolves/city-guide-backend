@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :whats_ons
 
+  get 'whats_ons/:id/destroy' => 'whats_ons#destroy', :as => 'destroy_whats_on'
+
   resources :hotspots
   get 'hotspots/list/:category' => 'hotspots#list', :as => 'list_hotspots'
   get 'hotspots/:category/new' => 'hotspots#new', :as => 'hotspots_new'
