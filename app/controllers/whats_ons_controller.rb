@@ -14,7 +14,7 @@ class WhatsOnsController < ApplicationController
 
   # GET /whats_ons/new
   def new
-    @hotspot = WhatsOn.new
+    @whatsOn = WhatsOn.new
   end
 
   # GET /whats_ons/1/edit
