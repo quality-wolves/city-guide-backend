@@ -17,14 +17,20 @@
     });
 
     App.mdPlugins.geolocationMapController.onAfterCommand( 'create', function ( widget, options ) {
-        App.geolocation.getCurrentPosition(
-            new App.mdClasses.MDCallback( true, this.onAfterGetCurrentPosition, widget ),
-            new App.mdClasses.MDCallback( true, this.onFailGetCurrentPosition, widget )
-        );
         widget.
             initCallbacks().
             initMap().
             initAutocomplete();
+
+        if( widget.map.options.center ){
+            widget.updateMarker(widget.map.options.center);
+            widget.map.geocode( {location: widget.map.options.center}, widget.onAfterGocode );
+        } else {
+            App.geolocation.getCurrentPosition(
+                new App.mdClasses.MDCallback( true, this.onAfterGetCurrentPosition, widget ),
+                new App.mdClasses.MDCallback( true, this.onFailGetCurrentPosition, widget )
+            );
+        }
     } );
 
 })(App.jQuery);
