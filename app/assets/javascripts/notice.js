@@ -1,4 +1,6 @@
-(function(){
+(function(toastr){
+	'use strict';
+	
 	App.ready(function(){
 		toastr.options = {
 			"closeButton": true,
@@ -14,8 +16,13 @@
 			"showMethod": "fadeIn",
 			"hideMethod": "fadeOut"
 		};
-		if($("#notice").length)toastr.success($("#notice").text())
-		if($("#alert").length)toastr.info($("#alert").text())
-		if($("#error").length)toastr.error($("#error").text())
-	})
-})();
+		
+		var notice = $("#notice"), alert = $("#alert"), error = $("#error");
+
+		notice.length && toastr.success(notice.text());
+		alert.length && toastr.info(alert.text());
+		error.length && toastr.error(error.text());
+
+	});
+
+})(toastr);
