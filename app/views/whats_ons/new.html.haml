@@ -21,7 +21,7 @@
       .input-group.input-icon.right
         - if !@error.empty?
           %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
-        =f.datetime_field :date, class: 'form-control input-medium date-picker'
+        =f.text_field :date, class: 'form-control input-medium date-picker'
     - @error = @whatsOn.errors.any? && @whatsOn.errors[:description].any? ? @whatsOn.errors[:description] : ''
     %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
       = f.label :description
