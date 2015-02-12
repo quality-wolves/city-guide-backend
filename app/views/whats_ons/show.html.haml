@@ -13,5 +13,5 @@
         Back
 .col-md-12.col-sm-4
   = image_tag @whatsOn.image.url(:medium).gsub(/^\w+/, ''), class: 'col-md-3'
-  %date.col-md-9=@whatsOn.date
+  %date.col-md-9=@whatsOn.date.strftime('%m/%d/%Y')
   %p.col-md-9=@whatsOn.description
