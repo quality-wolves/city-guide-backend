@@ -50,7 +50,7 @@ class WhatsOnsController < ApplicationController
   # DELETE /whats_ons/1
   # DELETE /whats_ons/1.json
   def destroy
-    if @hotspot.destroy
+    if @whatsOn.destroy
     	flash[:notice] = "Successfully delete what`s on."
       redirect_to whats_ons_path
     else
