@@ -67,6 +67,8 @@ class WhatsOnsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def whats_on_params
-      params.require(:whatsOn).permit(:title, :description, :image, :date)
+      p = params.require(:whatsOn).permit(:title, :description, :image, :date)
+      p[:date] = Date.strptime(p[:date], '%m/%d/%Y');
+      return p
     end
 end
