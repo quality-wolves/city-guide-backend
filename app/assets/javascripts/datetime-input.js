@@ -2,14 +2,14 @@
 	'use strict';
 	
 	App.ready(function(){
-		var datetime = new App.Date(),settings = {
-	    autoclose: true,
-	    showSeconds: true,
-	    minuteStep: 1
-	  };
 
-		$('.datetime-picker').datetimepicker( settings );
-		$('.date-picker').datepicker( settings );
+		var datePicker = $('.date-picker');
+
+		if( datePicker.val() ){
+			datePicker.datepicker( 'update', new App.Date( datePicker.val() ) );
+		} else {
+			datePicker.datepicker( 'update', new App.Date() );
+		}
 
 	});
 	
