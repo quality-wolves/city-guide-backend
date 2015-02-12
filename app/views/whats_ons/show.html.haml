@@ -1,0 +1,17 @@
+.portlet.box.blue-hoki
+  .portlet-title
+    .caption= @whatsOn.title
+    .actions
+      %a.btn.btn-default.btn-sm{href:edit_whats_on_path(@whatsOn)}
+        %i.fa.fa-pencil
+        Edit
+      %a.btn.btn-default.btn-sm{href:destroy_whats_on_path(@whatsOn)}
+        %i.fa.fa-remove
+        Delete
+      %a.btn.btn-default.btn-sm{href:whats_ons_path}
+        %i.fa.fa-caret-left
+        Back
+.col-md-12.col-sm-4
+  = image_tag @whatsOn.image.url(:medium).gsub(/^\w+/, ''), class: 'col-md-3'
+  %date.col-md-9=@whatsOn.date
+  %p.col-md-9=@whatsOn.description
