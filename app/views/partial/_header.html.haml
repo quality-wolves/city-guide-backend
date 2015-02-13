@@ -23,4 +23,10 @@
           =link_to new_whats_on_path, :class => '.btn.btn-circle.green-haze.dropdown-toggle', :style=>'color: white;text-decoration: none!important;' do
             %i.fa.fa-plus
             %span.hidden-sm.hidden-xs= 'What`s on'
+    .page-actions{style:'float: right;margin: 15px 15px 0 17px;'}
+      .btn-group
+        %button.btn.btn-circle.green-haze.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
+          =link_to destroy_admin_session_path, :method => :delete, :class => '.btn.btn-circle.green-haze.dropdown-toggle', :style=>'color: white;text-decoration: none!important;' do
+            %i.fa.fa-sign-out
+            %span.hidden-sm.hidden-xs= 'Logout'
     .page-top{:style => 'background: white; width: 100%;'}
