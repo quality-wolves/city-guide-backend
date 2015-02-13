@@ -43,8 +43,10 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'devise'
+
 gem 'rmagick'
 gem 'fog'
-gem 'paperclip', github: 'thoughtbot/paperclip'
-gem 'papercrop', github: 'rsantamaria/papercrop'
+gem 'paperclip'
+gem 'papercrop'
 gem 'haml'
