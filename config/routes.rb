@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins, controllers: { registrations: 'registrations'}
+
   resources :whats_ons
 
   get 'whats_ons/:id/destroy' => 'whats_ons#destroy', :as => 'destroy_whats_on'
