@@ -1,0 +1,41 @@
+.logo
+  .logo-default{:style=>"text-decoration: none; color: white;font-size: 18px;margin: 0;line-height: 65px;"}
+    ='CITYGUIDE'
+.content
+  =form_for resource, as: resource_name, url: session_path(resource_name), html: {class: 'login-form',novalidate: 'novalidate'} do |f|
+    %h3.form-title='Sign In'
+    = render 'partial/notice'
+    - @error = @admin.errors.any? && @admin.errors[:email].any? ? @admin.errors[:email] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :email , class: "control-label visible-ie8 visible-ie9"
+      = f.email_field :email, placeholder: 'Email', class: "form-control form-control-solid placeholder-no-fix", autocomplete: 'off'
+    
+    - @error = @admin.errors.any? && @admin.errors[:password].any? ? @admin.errors[:password] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :password , class: "control-label visible-ie8 visible-ie9"
+      = f.password_field :password, placeholder: 'Password', class: "form-control form-control-solid placeholder-no-fix", autocomplete: 'off'
+
+    .form-actions
+      = f.submit 'Login', :class => 'btn btn-success uppercase'
+      %label.rememberme.check
+        .checker
+          %span
+            =f.check_box :remember_me
+        ='Remember'
+      %a{:href=>"javascript:;",:id=>"forget-password",:class=>"forget-password"}='Forgot Password?'
+
+  / <form class="forget-form" action="index.html" method="post" novalidate="novalidate">
+  /   <h3>Forget Password ?</h3>
+  /   <p>
+  /      Enter your e-mail address below to reset your password.
+  /   </p>
+  /   <div class="form-group">
+  /     <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email">
+  /   </div>
+  /   <div class="form-actions">
+  /     <button type="button" id="back-btn" class="btn btn-default">Back</button>
+  /     <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+  /   </div>
+  / </form>
+
+.copyright='2014 © Metronic. Admin Dashboard Template.'
