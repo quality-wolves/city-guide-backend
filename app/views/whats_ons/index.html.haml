@@ -6,4 +6,4 @@
     .col-md-3.col-sm-4.mix.mix_all.category_1{:style => 'margin: 10px; position: relative;'}
       = link_to whats_on_path(whatsOn) do
         %span{:style => 'position: absolute; color: white; font-size: 24px; left: 30px; top: 10px; text-shadow: 1px 1px 2px black;'}= whatsOn.title
-        = image_tag whatsOn.image.url(:medium).gsub(/^\w+/, '')
+        = image_tag whatsOn.image.url(:medium)
