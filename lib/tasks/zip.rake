@@ -1,21 +1,33 @@
+require 'rubygems'
+require 'zip'
+
 namespace :zip do
 
 	task :do do
-		temp_file = Tempfile.new( 'attachments.zip' )
-		 
-		Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
-      Find.find( File.join( Rails.public_path , 'uploads' ) ) do |path|
-        Find.prune if File.basename(path)[0] == ?.
-        dest = /#{dir}\/(\w.*)/.match(path)
-        # Skip files if they exists
-        begin
-          zipfile.add(dest[1],path) if dest
-        rescue Zip::ZipEntryExistsError
-        end
-      end
-    end
+		Dir.mkdir File.join( Rails.public_path , 'archive')
+		@inputDir = File.join( Rails.public_path , 'uploads' )
+    @outputFile = File.join( Rails.public_path , 'archive', 'attachments.zip' )
 
-		temp_file.save
+    entries = Dir.entries(@inputDir); entries.delete("."); entries.delete("..")
+    io = Zip::File.open(@outputFile, Zip::File::CREATE);
+    writeEntries(entries, "", io)
+    io.close();
+
 	end
+
+  def writeEntries(entries, path, io)
+    entries.each { |e|
+      zipFilePath = path == "" ? e : File.join(path, e)
+      diskFilePath = File.join(@inputDir, zipFilePath)
+      puts "Deflating " + diskFilePath
+      if File.directory?(diskFilePath)
+        io.mkdir(zipFilePath)
+        subdir =Dir.entries(diskFilePath); subdir.delete("."); subdir.delete("..")
+        writeEntries(subdir, zipFilePath, io)
+      else
+        io.get_output_stream(zipFilePath) { |f| f.print(File.open(diskFilePath, "rb").read())}
+      end
+    }
+  end
 
 end
