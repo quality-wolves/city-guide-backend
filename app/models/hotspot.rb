@@ -50,7 +50,9 @@ class Hotspot < ActiveRecord::Base
 #banner iamge processing
   #validates :banner, :presence => true
   
-  has_attached_file :image, :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'}
+  has_attached_file :image, 
+                    :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
+                    :path => 'uploads/:class-:id-:basename.:extension'
   do_not_validate_attachment_file_type :image
   # validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
   
