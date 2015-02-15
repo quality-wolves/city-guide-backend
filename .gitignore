@@ -21,6 +21,7 @@
 *.sublime-workspace
 public/hotspots/*
 public/whats_ons/*
+public/uploads/*
 
 public/assets/*
 config/environments/local.rb
