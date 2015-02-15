@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :whats_ons
 
+  get 'is_updated/:date' => 'services#is_updated'
+
   get 'whats_ons/:id/destroy' => 'whats_ons#destroy', :as => 'destroy_whats_on'
 
   resources :hotspots
