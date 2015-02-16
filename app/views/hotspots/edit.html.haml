@@ -7,7 +7,7 @@
         = f.label :image
         .input-group.input-icon.right
           - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
           =f.file_field :image
      
       - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image1].any? ? @hotspot.errors[:aditionnal_image1] : ''
@@ -15,7 +15,7 @@
         = f.label :aditionnal_image1
         .input-group.input-icon.right
           - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
           =f.file_field :aditionnal_image1
 
       - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image2].any? ? @hotspot.errors[:aditionnal_image2] : ''
@@ -23,7 +23,7 @@
         = f.label :aditionnal_image2
         .input-group.input-icon.right
           - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
           =f.file_field :aditionnal_image2
           
       - @error = @hotspot.errors.any? && @hotspot.errors[:name].any? ? @hotspot.errors[:name] : ''
@@ -31,14 +31,14 @@
         = f.label :name
         .input-group.input-icon.right
           - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
           =f.text_field :name, class: 'form-control input-medium'
       - @error = @hotspot.errors.any? && @hotspot.errors[:description].any? ? @hotspot.errors[:description] : ''
       %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
         = f.label :description
         .input-icon.right
           - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
           =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
       .form-group
         %label='Address'
