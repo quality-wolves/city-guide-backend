@@ -51,3 +51,6 @@ gem 'haml'
 
 #zip gem
 gem 'rubyzip'
+
+#db dump
+gem 'rails_db_dump'
