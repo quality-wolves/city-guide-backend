@@ -1,6 +1,5 @@
 class HotspotsController < ApplicationController
   before_filter :authenticate_admin!
-  skip_before_action :verify_authenticity_token
   before_action :set_hotspot, only: [:show, :edit, :update, :destroy]
 
   # GET /hotspots

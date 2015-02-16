@@ -1,6 +1,5 @@
 class WhatsOnsController < ApplicationController
   before_filter :authenticate_admin!
-  skip_before_action :verify_authenticity_token
 	before_action :set_whats_on, only: [:show, :edit, :update, :destroy]
 	# GET /whats_ons
   # GET /whats_ons.json
