@@ -28,7 +28,14 @@
             App.newInstanceArgs( api.LatLng, App.isString( this.options.center ) ? App.jsonDecode( this.options.center ) : this.options.center );
         this.options.mapTypeId = api.MapTypeId[this.options.mapTypeId];
         this.map = this.$.find( '.map' );
+        this.prepareOptions();
         this.map = new api.Map( this.map.get( 0 ), this.options );
+    };
+
+    GMap.prototype.prepareOptions = function(){
+        for(var key in this.options.zoomControlOptions){
+            this.options.zoomControlOptions[key] = App.getEntityOfAlias('google',this.options.zoomControlOptions[key]);
+        }
     };
 
     GMap.prototype.initCustomControl = function () {
