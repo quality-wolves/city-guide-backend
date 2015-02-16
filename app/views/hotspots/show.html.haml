@@ -12,5 +12,5 @@
         %i.fa.fa-caret-left
         Back
 .col-md-12.col-sm-4
-  = image_tag @hotspot.image.url(:medium), class: 'col-md-3'
+  = image_tag @hotspot.image.url(:medium).gsub(/^\w+/, ''), class: 'col-md-3'
   %p.col-md-9=@hotspot.description

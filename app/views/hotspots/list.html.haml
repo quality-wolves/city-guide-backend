@@ -6,4 +6,4 @@
     .col-md-3.col-sm-4.mix.mix_all.category_1{:style => 'margin: 10px; position: relative;'}
       = link_to hotspot_path(hotspot) do
         %span{:style => 'position: absolute; color: white; font-size: 24px; left: 30px; top: 10px; text-shadow: 1px 1px 2px black;'}= hotspot.name
-        = image_tag hotspot.image.url(:medium)
+        = image_tag hotspot.image.url(:medium).gsub(/^\w+/, '')
