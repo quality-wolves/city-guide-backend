@@ -53,7 +53,18 @@ class Hotspot < ActiveRecord::Base
   has_attached_file :image, 
                     :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
                     :path => 'uploads/:class-:id-:basename-:style.:extension'
-  do_not_validate_attachment_file_type :image
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
+  has_attached_file :aditionnal_image1, 
+                    :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
+                    :path => 'uploads/:class-:id-:basename-:style.:extension'
+  validates_attachment_content_type :aditionnal_image1, :content_type => /\Aimage\/.*\Z/
+
+  has_attached_file :aditionnal_image2, 
+                    :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
+                    :path => 'uploads/:class-:id-:basename-:style.:extension'
+  validates_attachment_content_type :aditionnal_image2, :content_type => /\Aimage\/.*\Z/
+  
   # validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
   
   #after_update :reprocess_banner, :if => :cropping?

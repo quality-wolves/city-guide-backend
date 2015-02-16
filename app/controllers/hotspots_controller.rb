@@ -75,10 +75,10 @@ class HotspotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_params
-      params.require(:hotspot).permit(:image, :category, :name, :description, :lat, :lng)
+      params.require(:hotspot).permit(:image, :category, :name, :description, :lat, :lng, :aditionnal_image1, :aditionnal_image2)
     end
 
     def update_params
-      params.require(:hotspot).permit(:image, :name, :description, :lat, :lng)
+      params.require(:hotspot).permit(:image, :name, :description, :lat, :lng, :aditionnal_image1, :aditionnal_image2)
     end
 end
