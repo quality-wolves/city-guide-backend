@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins, controllers: { registrations: 'registrations'}
+
   resources :whats_ons
 
   get 'is_updated/:date' => 'services#is_updated'

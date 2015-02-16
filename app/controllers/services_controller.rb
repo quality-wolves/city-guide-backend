@@ -1,4 +1,5 @@
 class ServicesController < ApplicationController
+	before_filter :authenticate
 	
 	def is_updated
 		@count = Hotspot.where("updated_at > ?",params[:date]).count
@@ -28,6 +29,16 @@ class ServicesController < ApplicationController
     
     send_file outputFile;
 
+	end
+
+	protected
+
+	def authenticate
+	    authenticate_or_request_with_http_basic do |username, password|
+	        if( admin = Admin.find_by_email(username) )
+	        	admin.valid_password?(password)
+	        end
+	    end
 	end
 
 end

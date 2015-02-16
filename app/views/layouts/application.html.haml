@@ -1,19 +1,23 @@
 !!!
 %html{:lang => 'en'}
   = render 'partial/head'
-  %body.page-boxed.page-header-fixed.page-container-bg-solid.page-sidebar-closed-hide-logo
-    = render 'partial/header'
-    .clearfix
-    .container
-      .page-container
-        = render 'partial/notice'
-        = render 'partial/sidebar'
-        .page-content-wrapper
-          .page-content{:style=>'min-height: 624px;'}
-            .row
-              .col-md-12
-                = yield
-                - 3.times do
-                  %br
-    = render 'partial/footer'
-    = render 'partial/scripts'
+  -if admin_signed_in?
+    %body.page-boxed.page-header-fixed.page-container-bg-solid.page-sidebar-closed-hide-logo
+      = render 'partial/header'
+      .clearfix
+      .container
+        .page-container
+          = render 'partial/notice'
+          = render 'partial/sidebar'
+          .page-content-wrapper
+            .page-content{:style=>'min-height: 624px;'}
+              .row
+                .col-md-12
+                  = yield
+                  - 3.times do
+                    %br
+      = render 'partial/footer'
+      = render 'partial/scripts'
+  -else
+    %body.login
+      = yield
