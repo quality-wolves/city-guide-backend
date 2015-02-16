@@ -52,7 +52,7 @@ class Hotspot < ActiveRecord::Base
   
   has_attached_file :image, 
                     :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
-                    :path => 'uploads/:class-:id-:basename.:extension'
+                    :path => 'uploads/:class-:id-:basename-:style.:extension'
   do_not_validate_attachment_file_type :image
   # validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
   
