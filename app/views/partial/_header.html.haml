@@ -8,7 +8,7 @@
       %a{:href => ';javascript', :class => 'menu-toggler responsive-toggler', :data => {:toggle => 'collapse', :target => '.navbar-collapse'}}
     .page-actions
       .btn-group
-        %button.btn.btn-circle.green-haze.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
+        %button.btn.btn-circle.green-haze.dropdown-toggle{:style => 'margin-right: 5px;', :type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
           %i.fa.fa-plus
           %span.hidden-sm.hidden-xs= 'New Hotspot'
           %i.fa.fa-angle-down
@@ -19,11 +19,11 @@
                 %i{:class => Hotspot.category_icon_class(@category)}
                 = @category.capitalize
       .btn-group
-        %button.btn.btn-circle.green-haze.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
-          =link_to new_whats_on_path, :class => '.btn.btn-circle.green-haze.dropdown-toggle', :style=>'color: white;text-decoration: none!important;' do
+        =link_to new_whats_on_path, :style=>'color: white;text-decoration: none!important;' do
+          %button.btn.btn-circle.green-haze.dropdown-toggle
             %i.fa.fa-plus
             %span.hidden-sm.hidden-xs= 'New What`s on'
-    .page-actions{style:'float: right;margin: 15px 15px 0 17px;'}
+    .page-actions{:style => 'float: right;margin: 15px 15px 0 17px;'}
       .btn-group
         %button.btn.btn-circle.green-haze.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
           =link_to destroy_admin_session_path, :method => :delete, :class => '.btn.btn-circle.green-haze.dropdown-toggle', :style=>'color: white;text-decoration: none!important;' do
