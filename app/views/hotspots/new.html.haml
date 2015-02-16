@@ -10,6 +10,23 @@
           - if !@error.empty?
             %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
           =f.file_field :image
+
+      - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image1].any? ? @hotspot.errors[:aditionnal_image1] : ''
+      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+        = f.label :aditionnal_image1
+        .input-group.input-icon.right
+          - if !@error.empty?
+            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+          =f.file_field :aditionnal_image1
+
+      - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image2].any? ? @hotspot.errors[:aditionnal_image2] : ''
+      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+        = f.label :aditionnal_image2
+        .input-group.input-icon.right
+          - if !@error.empty?
+            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+          =f.file_field :aditionnal_image2
+
       - @error = @hotspot.errors.any? && @hotspot.errors[:name].any? ? @hotspot.errors[:name] : ''
       %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
         = f.label :name
