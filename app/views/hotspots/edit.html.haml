@@ -1,53 +1,53 @@
 %h3.page-title
   =sprintf("Edit \"%s\" Hotspot", @hotspot.category.capitalize)
-  =form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspot_path(@hotspot), method: :patch do |f|
-    .form-body  
-      - @error = @hotspot.errors.any? && @hotspot.errors[:image].any? ? @hotspot.errors[:image] : ''
-      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-        = f.label :image
-        .input-group.input-icon.right
-          - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-          =f.file_field :image
-     
-      - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image1].any? ? @hotspot.errors[:aditionnal_image1] : ''
-      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-        = f.label :aditionnal_image1
-        .input-group.input-icon.right
-          - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-          =f.file_field :aditionnal_image1
+=form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspot_path(@hotspot), method: :patch do |f|
+  .form-body  
+    - @error = @hotspot.errors.any? && @hotspot.errors[:image].any? ? @hotspot.errors[:image] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :image
+      .input-group.input-icon.right
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.file_field :image
+   
+    - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image1].any? ? @hotspot.errors[:aditionnal_image1] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :aditionnal_image1
+      .input-group.input-icon.right
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.file_field :aditionnal_image1
 
-      - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image2].any? ? @hotspot.errors[:aditionnal_image2] : ''
-      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-        = f.label :aditionnal_image2
-        .input-group.input-icon.right
-          - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-          =f.file_field :aditionnal_image2
-          
-      - @error = @hotspot.errors.any? && @hotspot.errors[:name].any? ? @hotspot.errors[:name] : ''
-      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-        = f.label :name
-        .input-group.input-icon.right
-          - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-          =f.text_field :name, class: 'form-control input-medium'
-      - @error = @hotspot.errors.any? && @hotspot.errors[:description].any? ? @hotspot.errors[:description] : ''
-      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-        = f.label :description
-        .input-icon.right
-          - if !@error.empty?
-            %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-          =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
-      .form-group
-        %label='Address'
-        .map-wrapper{:style=>'width:100%;height:500px',:data =>{:zoom=>{:control=>"true","control-options"=>"{\"style\":\"maps.ZoomControlStyle.SMALL\",\"position\":\"maps.ControlPosition.LEFT_TOP\"}"},:custom=>{:controls=>'[{"type":"searchInput","selector":".search","position":"TOP_LEFT"}]',:center=>[@hotspot.lat,@hotspot.lng].to_json}}}
-          .map{:style=>'width:100%;height:100%'}
-          .input-icon.right.search{:style=>'width: 100%;'}
-            %input.form-control.col-md-12{ :data => {:components => '{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}' }, :type => 'text', :maxlength => '512', :autocomplete => 'off' }
-            = f.hidden_field :lat, role: 'lat'
-            = f.hidden_field :lng, role: 'lng'
-    .form-actions
-      = f.submit 'Update', :class => 'btn blue'
-      = link_to 'Back', hotspot_path(@hotspot), class: 'btn default'
+    - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image2].any? ? @hotspot.errors[:aditionnal_image2] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :aditionnal_image2
+      .input-group.input-icon.right
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.file_field :aditionnal_image2
+        
+    - @error = @hotspot.errors.any? && @hotspot.errors[:name].any? ? @hotspot.errors[:name] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :name
+      .input-group.input-icon.right
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.text_field :name, class: 'form-control input-medium'
+    - @error = @hotspot.errors.any? && @hotspot.errors[:description].any? ? @hotspot.errors[:description] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :description
+      .input-icon.right
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
+    .form-group
+      %label='Address'
+      .map-wrapper{:style=>'width:100%;height:500px',:data =>{:zoom=>{:control=>"true","control-options"=>"{\"style\":\"maps.ZoomControlStyle.SMALL\",\"position\":\"maps.ControlPosition.LEFT_TOP\"}"},:custom=>{:controls=>'[{"type":"searchInput","selector":".search","position":"TOP_LEFT"}]',:center=>[@hotspot.lat,@hotspot.lng].to_json}}}
+        .map{:style=>'width:100%;height:100%'}
+        .input-icon.right.search{:style=>'width: 100%;'}
+          %input.form-control.col-md-12{ :data => {:components => '{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}' }, :type => 'text', :maxlength => '512', :autocomplete => 'off' }
+          = f.hidden_field :lat, role: 'lat'
+          = f.hidden_field :lng, role: 'lng'
+  .form-actions
+    = f.submit 'Update', :class => 'btn blue'
+    = link_to 'Back', hotspot_path(@hotspot), class: 'btn default'
