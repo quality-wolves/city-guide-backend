@@ -42,6 +42,7 @@ class HotspotsController < ApplicationController
         # render :action => "crop"
       # end
     else
+      params[:category] = @hotspot.category
       render :action => 'new'
     end
   end
@@ -52,6 +53,7 @@ class HotspotsController < ApplicationController
       flash[:notice] = sprintf("Successfully update %s.", @hotspot.category)
       redirect_to @hotspot
     else
+      params[:category] = @hotspot.category
       render :action => 'edit'
     end
   end
