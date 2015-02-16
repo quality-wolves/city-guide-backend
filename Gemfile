@@ -46,7 +46,14 @@ gem 'devise'
 
 gem 'rmagick'
 gem 'fog'
+
 gem 'paperclip'
 gem 'papercrop'
 gem 'haml'
 gem 'pace-rails'
+
+#zip gem
+gem 'rubyzip'
+
+#db dump
+gem 'rails_db_dump'

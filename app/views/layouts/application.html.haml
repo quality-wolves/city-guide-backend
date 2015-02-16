@@ -14,9 +14,10 @@
               .row
                 .col-md-12
                   = yield
+                  - 3.times do
+                    %br
       = render 'partial/footer'
       = render 'partial/scripts'
   -else
     %body.login
       = yield
-

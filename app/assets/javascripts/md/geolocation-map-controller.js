@@ -8,29 +8,21 @@
         targetSelector          : '.map-wrapper',
         name                    : 'geolocationMapController',
         dataKey                 : 'geolocationMap',
-        onAfterGetCurrentPosition : function ( position ) {
-            this.map.setCenter( new google.maps.LatLng( position.coords.latitude, position.coords.longitude ) );
-        },
-        onFailGetCurrentPosition:function(){
-        	alert();
+        initStartPoint:function(widget){
+            widget.updateMarker(widget.map.options.center);
+            widget.map.geocode( {location: widget.map.options.center}, widget.onAfterGocode );
         }
     });
 
     App.mdPlugins.geolocationMapController.onAfterCommand( 'create', function ( widget, options ) {
+        if(!widget.options.center){
+            widget.$.data('center',App.jsonEncode(["41.3850639","2.1734034999999494"]));
+        }
         widget.
             initCallbacks().
             initMap().
             initAutocomplete();
-
-        if( widget.map.options.center ){
-            widget.updateMarker(widget.map.options.center);
-            widget.map.geocode( {location: widget.map.options.center}, widget.onAfterGocode );
-        } else {
-            App.geolocation.getCurrentPosition(
-                new App.mdClasses.MDCallback( true, this.onAfterGetCurrentPosition, widget ),
-                new App.mdClasses.MDCallback( true, this.onFailGetCurrentPosition, widget )
-            );
-        }
+        App.setTimeout(this.initStartPoint,500,widget);
     } );
 
 })(App.jQuery);
