@@ -40,6 +40,7 @@ class Hotspot < ActiveRecord::Base
   end
   
   validates :name, :presence => true
+  validates :image, :presence => true
   validates :category, 
     :presence => true,
     :inclusion => { :in => self.categories }
