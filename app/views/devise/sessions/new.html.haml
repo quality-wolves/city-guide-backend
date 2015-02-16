@@ -15,14 +15,13 @@
       = f.label :password , class: "control-label visible-ie8 visible-ie9"
       = f.password_field :password, placeholder: 'Password', class: "form-control form-control-solid placeholder-no-fix", autocomplete: 'off'
 
-    .form-actions
+    .form-actions.text-center
       = f.submit 'Login', :class => 'btn btn-success uppercase'
       %label.rememberme.check
         .checker{:style => 'display: inline-block;'}
           %span
             =f.check_box :remember_me
         ='Remember'
-      %a{:href=>"javascript:;",:id=>"forget-password",:class=>"forget-password"}='Forgot Password?'
 
   / <form class="forget-form" action="index.html" method="post" novalidate="novalidate">
   /   <h3>Forget Password ?</h3>
