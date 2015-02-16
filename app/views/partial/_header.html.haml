@@ -15,7 +15,18 @@
         %ul.dropdown-menu{:role => 'menu'}
           - for @category in Hotspot.categories
             %li
-              = link_to hotspots_list_path(:category => @category) do
+              = link_to hotspots_new_path(:category => @category) do
                 %i{:class => Hotspot.category_icon_class(@category)}
                 = @category.capitalize
+      .btn-group
+        %button.btn.btn-circle.green-haze.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
+          =link_to new_whats_on_path, :class => '.btn.btn-circle.green-haze.dropdown-toggle', :style=>'color: white;text-decoration: none!important;' do
+            %i.fa.fa-plus
+            %span.hidden-sm.hidden-xs= 'New What`s on'
+    .page-actions{style:'float: right;margin: 15px 15px 0 17px;'}
+      .btn-group
+        %button.btn.btn-circle.green-haze.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
+          =link_to destroy_admin_session_path, :method => :delete, :class => '.btn.btn-circle.green-haze.dropdown-toggle', :style=>'color: white;text-decoration: none!important;' do
+            %i.fa.fa-sign-out
+            %span.hidden-sm.hidden-xs= 'Logout'
     .page-top{:style => 'background: white; width: 100%;'}

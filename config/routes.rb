@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
-  #resources :hotspots
-  get 'hotspots/list/:category' => 'hotspots#list', :as => 'hotspots_list'
+  devise_for :admins, controllers: { registrations: 'registrations'}
+
+  resources :whats_ons
+
+  get 'is_updated/:date' => 'services#is_updated'
+  get 'get_attachments_that_has_loaded_after/:date' => 'services#get_attachments_that_has_loaded_after'
+
+  get 'whats_ons/:id/destroy' => 'whats_ons#destroy', :as => 'destroy_whats_on'
+
+  resources :hotspots
+  get 'hotspots/list/:category' => 'hotspots#list', :as => 'list_hotspots'
   get 'hotspots/:category/new' => 'hotspots#new', :as => 'hotspots_new'
-  get 'hotspots/:id/edit' => 'hotspots#edit', :as => 'hotspot_edit'
+  get 'hotspots/:id/destroy' => 'hotspots#destroy', :as => 'destroy_hotspot'
+  delete 'hotspots/:id' => 'hotspots#destroy'
 
-  get 'hotspot/:id' => 'hotspots#show', :as => 'hotspot'
-
-  post 'hotspots' => 'hotspots#create'
-  patch 'hotspots' => 'hotspots#update'
   get 'hotspots/:id/crop' => 'catalog#crop'
 
 

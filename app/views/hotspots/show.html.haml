@@ -1,12 +1,18 @@
-%h1='Show ' + @hotspot.category.capitalize
 .portlet.box.blue-hoki
   .portlet-title
     .caption= @hotspot.name
     .actions
-      %a.btn.btn-default.btn-sm{href:hotspot_edit_path(@hotspot)}
+      %a.btn.btn-default.btn-sm{href:edit_hotspot_path(@hotspot)}
         %i.fa.fa-pencil
         Edit
-      = link_to 'Back', hotspots_list_path(@hotspot.category), class: 'btn btn-default btn-sm'
+      %a.btn.btn-default.btn-sm{href:destroy_hotspot_path(@hotspot)}
+        %i.fa.fa-remove
+        Delete
+      %a.btn.btn-default.btn-sm{href:list_hotspots_path(@hotspot.category)}
+        %i.fa.fa-caret-left
+        Back
 .col-md-12.col-sm-4
   = image_tag @hotspot.image.url(:medium).gsub(/^\w+/, ''), class: 'col-md-3'
+  = image_tag @hotspot.aditionnal_image1.url(:small).gsub(/^\w+/, ''), class: 'col-md-1' if @hotspot.aditionnal_image1.exists?
+  = image_tag @hotspot.aditionnal_image2.url(:small).gsub(/^\w+/, ''), class: 'col-md-1' if @hotspot.aditionnal_image2.exists?
   %p.col-md-9=@hotspot.description

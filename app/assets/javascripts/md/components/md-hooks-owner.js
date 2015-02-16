@@ -71,6 +71,6 @@
     HooksOwner._after = 'after';
     HooksOwner._before = 'before';
 
-    App.classes.MDHooksOwner = HooksOwner;
+    App.mdClasses.MDHooksOwner = HooksOwner;
 
-})( App.classes.MDEventTarget );
+})( App.mdClasses.MDEventTarget );

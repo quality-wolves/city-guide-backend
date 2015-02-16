@@ -7,7 +7,7 @@
  */
 /*jsHint*/
 /*global App*/
-(function ( $ ) {
+(function ( ) {
     'use strict';
     var componentForm = {
             street_number              : 'short_name',
@@ -20,7 +20,7 @@
         geometryComponents = ['lat', 'lng'],
         api = App.google.maps;
 
-    AutocompleteInput.extends( App.widgets.MDWidget );
+    AutocompleteInput.extends( App.mdWidgets.MDWidget );
 
     function AutocompleteInput( jQ, options ) {
         AutocompleteInput.super( this, 'constructor', jQ, options );
@@ -61,7 +61,24 @@
     };
 
     AutocompleteInput.prototype.fillInAddress = function ( ) {
-        var place = this.autocomplete.getPlace(), i;
+        this.setPlace(this.autocomplete.getPlace());
+        this.trigger();
+    };
+
+    AutocompleteInput.prototype.trigger = function(){
+        for ( var i in this.components ) {
+            this.components[i].trigger( 'change' );
+        }
+        this.$.trigger( 'place_changed' );
+    };
+
+    AutocompleteInput.prototype.getLocation = function(){
+        return this.place && this.place.geometry.location || null;
+    };
+
+    AutocompleteInput.prototype.setPlace = function(place){
+        var i;
+        this.place = place;
 
         for ( i = 0; i < place.address_components.length; i++ ) {
             var addressType = place.address_components[i].types[0];
@@ -76,21 +93,17 @@
                 this.components[i].val( place.geometry.location[i]() );
             }
         }
-        this.trigger();
-    };
+        place.formatted_address && this.$.val(place.formatted_address);
+    };    
 
-    AutocompleteInput.prototype.trigger = function(){
-        for ( var i in this.components ) {
-            this.components[i].trigger( 'change' );
-        }
-        this.$.trigger( 'change' );
-    };
+    App.mdWidgets.AutocompleteInput = AutocompleteInput;
+})( );
 
-    App.widgets.AutocompleteInput = AutocompleteInput;
-
-    $( App.document ).ready( function () {
-        $( '.md-autocomplete-location' ).each( function () {
-            new AutocompleteInput( $( this ) );
-        } );
-    } );
-})( App.jQuery );
+(function($){
+    $.mdAutocompleteAddress = $.createPlugin({
+        baseClass               : App.mdWidgets.AutocompleteInput,
+        targetSelector          : '.md-autocomplete-location',
+        name                    : 'mdAutocompleteAddress',
+        dataKey                 : 'md-autocomplete-address',
+    });
+})(App.jQuery);

@@ -9,7 +9,7 @@
 /*global App*/
 (function ( $, Plugin ) {
     'use strict';
-    var afterReady = new App.classes.MDCallbackChain();
+    var afterReady = new App.mdClasses.MDCallbackChain();
 
     /**
      * @param pluginSettings {App.Object}
@@ -29,7 +29,7 @@
 
         var plugin = new Plugin( pluginSettings );
         $.fn[pluginSettings.name] = plugin.createFn( $ );
-        $[pluginSettings.name] = plugin.createManager();
+        App.mdPlugins[pluginSettings.name] = $[pluginSettings.name] = plugin.createManager();
 
         pluginSettings.afterReady = pluginSettings.afterReady ||
                                     pluginSettings.targetSelector &&
@@ -44,14 +44,14 @@
         return $[pluginSettings.name];
     };
 
-    $( App.document ).ready( function () {
-        afterReady.exec( false ).clear();
+    App.ready( function () {
+        afterReady.exec( false );
     } );
 
 })( App.jQuery, (function () {
         'use strict';
 
-        Plugin.extends( App.classes.MDHooksOwner );
+        Plugin.extends( App.mdClasses.MDHooksOwner );
 
         /**
          * @class Plugin
@@ -138,7 +138,7 @@
         };
 
         Plugin.prototype._trigger = function ( type, commandName, args ) {
-            return App.classes.MDHooksOwner.super(
+            return App.mdClasses.MDHooksOwner.super(
                 this,
                 'trigger',
                 this._createHookName( type, commandName ),

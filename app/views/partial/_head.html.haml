@@ -10,8 +10,15 @@
   %link{:href => '/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css', :rel => 'stylesheet', :type => 'text/css'}
   %link{:href => '/assets/global/css/components.css', :rel => 'stylesheet', :type => 'text/css', :id => 'style_components'}
   %link{:href => '/assets/global/css/plugins.css', :rel => 'stylesheet', :type => 'text/css'}
-  %link{:href => '/assets/admin/layout2/css/layout.css', :rel => 'stylesheet', :type => 'text/css'}
+  %link{:href => '/assets/pace.css', :rel => 'stylesheet', :type => 'text/css'}
+  -if admin_signed_in?
+    %link{:href => '/assets/admin/layout2/css/layout.css', :rel => 'stylesheet', :type => 'text/css'}
+  -else
+    %link{:href => '/assets/login/layout.css', :rel => 'stylesheet', :type => 'text/css'}
+    %link{:href => '/assets/login/login.css', :rel => 'stylesheet', :type => 'text/css'}
+    %script{:src => '/assets/login/login.js', :type => 'text/javascript'}
   %link{:href => '/assets/admin/layout2/css/themes/grey.css', :rel => 'stylesheet', :type => 'text/css', :id => 'style_color'}
+  %link{:href => '/assets/global/plugins/toastr/toastr.min.css', :rel => 'stylesheet', :type => 'text/css'}
   %link{:rel => 'shortcut icon', :href => 'favicon.ico'}
   = javascript_include_tag 'application'
   

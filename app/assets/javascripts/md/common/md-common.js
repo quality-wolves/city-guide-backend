@@ -247,13 +247,13 @@
         enumerable  : true,
         writable    : false,
         configurable: false,
-        value       : ['widgets', 'classes', 'helpers', 'callbacks', 'plugins','singleton']
+        value       : ['mdWidgets', 'mdClasses', 'mdHelpers', 'mdCallbacks', 'mdPlugins','mdSingleton']
     } );
 
     App.entities.forEach( function ( item ) {
-        this[item] = {};
-        this[App.concat( 'get', item.capitalize(), 'OfAlias' )] = this.getEntityOfAlias.bind( this, item );
-        this[App.concat( 'set', item.capitalize(), 'OfAlias' )] = this.setEntityOfAlias.bind( this, item );
+        this[item] = this[item] || {};
+        this[App.concat( 'get', item.replace('md',''), 'OfAlias' )] = this.getEntityOfAlias.bind( this, item );
+        this[App.concat( 'set', item.replace('md',''), 'OfAlias' )] = this.setEntityOfAlias.bind( this, item );
     }, App );
 
 })();

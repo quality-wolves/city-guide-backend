@@ -27,6 +27,7 @@
 //= require turbolinks
 //= require jquery.jcrop
 //= require papercrop
+//= require pace/pace
 //= require_tree './md'
 //= require admin/header
 //= require_tree .

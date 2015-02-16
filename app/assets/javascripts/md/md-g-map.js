@@ -14,7 +14,7 @@
     var api = google.maps;
     var geocoder = new api.Geocoder();
 
-    GMap.extends( App.widgets.MDWidget );
+    GMap.extends( App.mdWidgets.MDWidget );
 
     function GMap( jQ, options ) {
         GMap.super( this, 'constructor', jQ, options );
@@ -68,27 +68,30 @@
     };
 
     GMap.prototype.geocode = function ( options, callback ) {
-        callback = new App.classes.MDCallback( true, callback, this );
+        callback = callback instanceof App.mdClasses.MDCallback ? callback : new App.mdClasses.MDCallback( true, callback, this );
         geocoder.geocode( options, function ( result ) {
             callback.fnArgs = [result];
             callback.exec();
         } );
     };
 
-    GMap.prototype.setMarker = function ( setings, events ) {
-        setings.map = this.map;
+    GMap.prototype.setMarker = function ( settings, events ) {
+        settings.map = this.map;
         var marker = new api.Marker( settings );
         if ( !events ) {
-            return;
+            return marker;
         }
         marker.mdGmap = this;
         for ( var eventName in events ) {
             this.attachEventListener(
                 marker,
                 eventName,
-                new App.classes.MDCallback( true, events[eventName], marker )
+                events[eventName] instanceof App.mdClasses.MDCallback ? 
+                    events[eventName] : 
+                    new App.mdClasses.MDCallback( true, events[eventName], marker )
             );
         }
+        return marker;
     };
 
     GMap.prototype.attachEventListener = function ( o, eventName, mdCallback ) {
@@ -112,7 +115,7 @@
     GMap.prototype.parseGeocodeResult = function ( geocodeResult ) {
         var parsed = {};
         geocodeResult.forEach( function ( item ) {
-            item.address_component.forEach( this.loop, this.settings );
+            item.address_components.forEach( this.loop, this.settings );
         }, {
             loop    : function ( item ) {
                 this.settings.addressComponents = item;
@@ -135,12 +138,16 @@
         return parsed;
     };
 
-    GMap.prototype.listenMap = function ( eventName, callback ) {
+    GMap.prototype.listenMap = function ( eventName, callback, additionnalArgs ) {
         var self = this;
+        additionnalArgs = additionnalArgs || [];
+        if( !App.isArray( additionnalArgs ) ){
+            additionnalArgs = [ additionnalArgs ];
+        }
         api.event.addListener( this.map, eventName, function () {
             var args = App.prepareArguments( arguments ) || [];
             args.unshift( self );
-            callback.apply( null, args );
+            callback.apply( null, args.concat( additionnalArgs ) );
         } );
     };
 
@@ -153,22 +160,21 @@
 
     GMap.prototype.setMarkers = function ( dataSet, markerOptions ) {
         var fn = function ( markerData ) {
-            markerData.marker = new api.Marker( App.extend( markerOptions, {
+            return markerData.marker = new api.Marker( App.extend( markerOptions, {
                 map     : this,
                 position: new api.LatLng( markerData.lat, markerData.lng )
             } ) );
         };
         if ( App.isArray( dataSet ) ) {
-            dataSet.forEach( fn, this.map );
-        } else {
-            fn.call( this.map, dataSet );
+            return dataSet.map( fn, this.map );
         }
+        return fn.call( this.map, dataSet );
     };
 
     GMap.prototype.showPopUp = function () {
         var citySelect = App.jQuery( this.options.citySelectPopUpTarget );
         citySelect.mdMDModalWindow( 'show' ).mdMDModalWindow( 'lock' );
-        var callback = new App.classes.MDCallback( true, function ( city ) {
+        var callback = new App.mdClasses.MDCallback( true, function ( city ) {
             var self = this;
             geocoder.geocode( {'address': city}, function ( result ) {
                 self.setCenter( result[0].geometry.location );
@@ -209,6 +215,6 @@
         }
     } );
 
-    App.widgets.GMap = GMap;
+    App.mdWidgets.GMap = GMap;
 
 })();

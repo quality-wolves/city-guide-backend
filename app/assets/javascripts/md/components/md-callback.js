@@ -9,14 +9,14 @@
 /*global App*/
 /**
  * @class
- * @memberOf {App.classes}
+ * @memberOf {App.mdClasses}
  * */
 (function () {
     'use strict';
 
     /**
      * @constructor
-     * @this {App.classes.MDCallback}
+     * @this {App.mdClasses.MDCallback}
      * @param [isUsageContext] {Boolean}
      * @param fn {Function}
      * @param [args] {Array}
@@ -32,23 +32,23 @@
 
     /**
      * @field
-     * @fieldOf {App.classes.MDCallback.prototype}
+     * @fieldOf {App.mdClasses.MDCallback.prototype}
      * @type Function*/
     Callback.prototype.fn = null;
     /**
      * @field
-     * @fieldOf {App.classes.MDCallback.prototype}
+     * @fieldOf {App.mdClasses.MDCallback.prototype}
      * @type Array*/
     Callback.prototype.fnArgs = null;
     /**
      * @field
-     * @fieldOf {App.classes.MDCallback.prototype}
+     * @fieldOf {App.mdClasses.MDCallback.prototype}
      * @type Object*/
     Callback.prototype.context = null;
 
     /**
-     * @memberOf {App.classes.MDCallback.prototype}
-     * @this {App.classes.MDCallback}
+     * @memberOf {App.mdClasses.MDCallback.prototype}
+     * @this {App.mdClasses.MDCallback}
      * @protected
      * @param args {Array}
      * */
@@ -65,8 +65,8 @@
     };
 
     /**
-     * @memberOf {App.classes.MDCallback.prototype}
-     * @this {App.classes.MDCallback}
+     * @memberOf {App.mdClasses.MDCallback.prototype}
+     * @this {App.mdClasses.MDCallback}
      * @param settings {Object}
      * */
     Callback.prototype.exec = function ( settings ) {
@@ -91,8 +91,8 @@
     };
 
     /**
-     * @memberOf {App.classes.MDCallback.prototype}
-     * @this {App.classes.MDCallback}
+     * @memberOf {App.mdClasses.MDCallback.prototype}
+     * @this {App.mdClasses.MDCallback}
      * */
     Callback.prototype.destroy = function () {
         delete this.fn.callback;
@@ -101,5 +101,5 @@
         delete this.fn;
     };
 
-    App.classes.MDCallback = Callback;
+    App.mdClasses.MDCallback = Callback;
 })();

@@ -1,6 +1,6 @@
-%h1=sprintf("Edit %s", @hotspot.category.capitalize)
-.form
-  =form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspots_path do |f|
+%h3.page-title
+  =sprintf("Edit \"%s\" Hotspot", @hotspot.category.capitalize)
+  =form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspot_path(@hotspot), method: :patch do |f|
     .form-body  
       - @error = @hotspot.errors.any? && @hotspot.errors[:image].any? ? @hotspot.errors[:image] : ''
       %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
@@ -9,6 +9,23 @@
           - if !@error.empty?
             %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
           =f.file_field :image
+     
+      - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image1].any? ? @hotspot.errors[:aditionnal_image1] : ''
+      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+        = f.label :aditionnal_image1
+        .input-group.input-icon.right
+          - if !@error.empty?
+            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+          =f.file_field :aditionnal_image1
+
+      - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image2].any? ? @hotspot.errors[:aditionnal_image2] : ''
+      %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+        = f.label :aditionnal_image2
+        .input-group.input-icon.right
+          - if !@error.empty?
+            %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
+          =f.file_field :aditionnal_image2
+          
       - @error = @hotspot.errors.any? && @hotspot.errors[:name].any? ? @hotspot.errors[:name] : ''
       %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
         = f.label :name
@@ -22,13 +39,15 @@
         .input-icon.right
           - if !@error.empty?
             %i.fa.fa-exclamation.tooltips{:dataOriginalTitle=>@error, :dataContainer=>"body"}
-          =f.text_area :description, class: 'form-control col-md-12'
+          =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
       .form-group
         %label='Address'
-        .input-icon.right
-          %input.md-autocomplete-location.form-control.col-md-12{ :dataComponents => '{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}', :type => 'text', :maxlength => '512', :autocomplete => 'off' }
-          = f.hidden_field :lat, role: 'lat'
-          = f.hidden_field :lng, role: 'lng'
+        .map-wrapper{:style=>'width:100%;height:500px',:data =>{:custom=>{:controls=>'[{"type":"searchInput","selector":".search","position":"TOP_LEFT"}]'}, :center=>[@hotspot.lat,@hotspot.lng].to_json}}
+          .map{:style=>'width:100%;height:100%'}
+          .input-icon.right.search{:style=>'width: 100%;'}
+            %input.form-control.col-md-12{ :data => {:components => '{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}' }, :type => 'text', :maxlength => '512', :autocomplete => 'off' }
+            = f.hidden_field :lat, role: 'lat'
+            = f.hidden_field :lng, role: 'lng'
     .form-actions
-      = f.submit sprintf('Update %s',@hotspot.category.capitalize), :class => 'btn blue'
+      = f.submit 'Update', :class => 'btn blue'
       = link_to 'Back', hotspot_path(@hotspot), class: 'btn default'
