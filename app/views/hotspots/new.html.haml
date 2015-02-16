@@ -43,7 +43,7 @@
           =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
       .form-group
         %label='Address'
-        .map-wrapper{:style=>'width:100%;height:500px',:data =>{:custom=>{:controls=>'[{"type":"searchInput","selector":".search","position":"TOP_LEFT"}]',:center=>[@hotspot.lat,@hotspot.lng].to_json}}}
+        .map-wrapper{:style=>'width:100%;height:500px',:data =>{:zoom=>{:control=>"true","control-options"=>"{\"style\":\"maps.ZoomControlStyle.SMALL\",\"position\":\"maps.ControlPosition.LEFT_TOP\"}"},:custom=>{:controls=>'[{"type":"searchInput","selector":".search","position":"TOP_LEFT"}]',:center=>[@hotspot.lat,@hotspot.lng].to_json}}}
           .map{:style=>'width:100%;height:100%'}
           .input-icon.right.search{:style=>'width: 100%;'}
             %input.form-control.col-md-12{ :data => {:components => '{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}' }, :type => 'text', :maxlength => '512', :autocomplete => 'off' }
