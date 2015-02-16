@@ -1,6 +1,6 @@
 ready = ->
   $('.page-header').on('click', '.page-actions button', (event) ->
-    event.preventDefault();
+    event.stopPropagation();
     $(this).parents('.btn-group').toggleClass('open')
   )
 
