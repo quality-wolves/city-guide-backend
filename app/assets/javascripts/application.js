@@ -22,7 +22,6 @@
 //= require 'global/plugins/bootstrap-switch/js/bootstrap-switch.min.js'
 //= require 'global/scripts/metronic.js'
 //= require 'admin/layout2/scripts/layout.js'
-//= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.jcrop
