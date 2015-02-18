@@ -30,7 +30,7 @@ namespace :zip do
     Dir.mkdir archive_db_path unless Dir.exists? archive_db_path
 
     io = Zip::File.open( File.join(archive_db_path,"#{Time.now}.zip"), Zip::File::CREATE)
-    io.get_output_stream( "#{model}.json" ) { |f| 
+    io.get_output_stream( "db.sqlite3" ) { |f| 
       f.print( File.open( File.join( Rails.root, 'db', "#{Rails.env}.sqlite3"), "rb").read )
     }
     io.close
