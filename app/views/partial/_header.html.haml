@@ -25,6 +25,11 @@
             %span.hidden-sm.hidden-xs= 'New What`s on'
     .page-actions{:style => 'float: right;margin: 15px 15px 0 17px;'}
       .btn-group
+        %button.btn.btn-circle.blue.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
+          =link_to publish_db_path, :class => '.btn.btn-circle.blue.dropdown-toggle', :style=>'color: white;text-decoration: none!important;' do
+            %i.fa.fa-share
+            %span.hidden-sm.hidden-xs= 'Publish DB'
+      .btn-group
         %button.btn.btn-circle.green-haze.dropdown-toggle{:type => 'button', :data => {:toggle => 'dropdown'}, :aria => {:expanded => 'true'}}
           =link_to destroy_admin_session_path, :method => :delete, :class => '.btn.btn-circle.green-haze.dropdown-toggle', :style=>'color: white;text-decoration: none!important;' do
             %i.fa.fa-sign-out
