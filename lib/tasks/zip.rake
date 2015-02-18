@@ -23,12 +23,15 @@ namespace :zip do
     archive_path = Rails.configuration.archive_path
     archive_db_path = Rails.configuration.archive_db_path
 
-    io = Zip::File.open( File.join(archive_db_path,"#{Time.now}.zip"), Zip::File::CREATE)
+    db_backup = File.join(archive_db_path,"#{Time.now}.zip")
+
+    io = Zip::File.open( db_backup, Zip::File::CREATE)
     io.get_output_stream( "db.sqlite3" ) { |f| 
       f.print( File.open( File.join( Rails.root, 'db', "#{Rails.env}.sqlite3"), "rb").read )
     }
     io.close
 
+    File.chmod 0644, db_backup 
   end
 
 end

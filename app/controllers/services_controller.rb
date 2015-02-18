@@ -20,6 +20,7 @@ class ServicesController < ApplicationController
 	    	}
 	    }
 	    io.close();
+	    File.chmod 0644, outputFile 
 		end
     
     send_file outputFile;
