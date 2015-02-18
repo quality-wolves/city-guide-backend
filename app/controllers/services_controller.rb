@@ -30,9 +30,18 @@ class ServicesController < ApplicationController
 		send_file Dir[ File.join( Rails.configuration.archive_db_path, '*' ) ].max { |a,b| File.ctime(a) <=> File.ctime(b) }
 	end
 
+	def publish_db
+		require 'rake'
+		CityGuide::Application.load_tasks
+		Rake::Task['zip:db_backup'].invoke
+		flash[:notice] = sprintf("Database is published now")
+    redirect_to :back
+	end
+
 	protected
 
 	def authenticate
+		authenticate_admin! if action_name == 'publish_db'
     authenticate_or_request_with_http_basic do |username, password|
       if( admin = Admin.find_by_email(username) )
       	admin.valid_password?(password)
