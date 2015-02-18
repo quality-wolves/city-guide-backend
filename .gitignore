@@ -26,3 +26,6 @@ public/archive/*
 
 public/assets/*
 config/environments/local.rb
+
+/archive/*
+!/archive/.keep

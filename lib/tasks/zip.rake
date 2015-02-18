@@ -2,32 +2,33 @@ require 'rubygems'
 require 'zip'
 
 namespace :zip do
+	
+  task :clean_attachments do
+    archive_path = Rails.configuration.archive_path
+    archive_db_path = Rails.configuration.archive_db_path
 
-	task :do do
-		Dir.mkdir File.join( Rails.public_path , 'archive')
-		@inputDir = File.join( Rails.public_path , 'uploads' )
-    @outputFile = File.join( Rails.public_path , 'archive', 'attachments.zip' )
+    Dir[ File.join(archive_path,'*_attachments.zip') ].each{ |f|
+      File.delete(f) if ((Time.now - File.atime(f))/ 3600).round > 1
+    }
 
-    entries = Dir.entries(@inputDir); entries.delete("."); entries.delete("..")
-    io = Zip::File.open(@outputFile, Zip::File::CREATE);
-    writeEntries(entries, "", io)
-    io.close();
+    db_arhives = Dir[ archive_db_path ]
+    db_arhives.each{ |f|
+      File.delete(f) if ((Time.now - File.atime(f))/ 3600).round > 1
+    } if db_arhives.length > 1
 
 	end
 
-  def writeEntries(entries, path, io)
-    entries.each { |e|
-      zipFilePath = path == "" ? e : File.join(path, e)
-      diskFilePath = File.join(@inputDir, zipFilePath)
-      puts "Deflating " + diskFilePath
-      if File.directory?(diskFilePath)
-        io.mkdir(zipFilePath)
-        subdir =Dir.entries(diskFilePath); subdir.delete("."); subdir.delete("..")
-        writeEntries(subdir, zipFilePath, io)
-      else
-        io.get_output_stream(zipFilePath) { |f| f.print(File.open(diskFilePath, "rb").read())}
-      end
+  #00 00 * * * /bin/bash -l -c 'rake zip:db_backup >> /var/log/city-guide/backup.log 2>&1'
+  task :db_backup => :environment do
+    archive_path = Rails.configuration.archive_path
+    archive_db_path = Rails.configuration.archive_db_path
+
+    io = Zip::File.open( File.join(archive_db_path,"#{Time.now}.zip"), Zip::File::CREATE)
+    io.get_output_stream( "db.sqlite3" ) { |f| 
+      f.print( File.open( File.join( Rails.root, 'db', "#{Rails.env}.sqlite3"), "rb").read )
     }
+    io.close
+
   end
 
 end

@@ -54,6 +54,3 @@ gem 'pace-rails'
 
 #zip gem
 gem 'rubyzip'
-
-#db dump
-gem 'rails_db_dump'
