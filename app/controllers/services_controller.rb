@@ -15,11 +15,11 @@ class ServicesController < ApplicationController
 		unless File.exist?(outputFile)
 			io = Zip::File.open( outputFile, Zip::File::CREATE);
 		    Hotspot.where("image_updated_at > ?",params[:date]).each { |h|
-		    			zipFilePath = h.image.path(:large)
-			    		diskFilePath = File.join( Rails.public_path, zipFilePath )
-				      zipFilePath = File.basename(zipFilePath)
-				      io.get_output_stream(zipFilePath) { |f| 
-			      	f.print(File.open(diskFilePath, "rb").read())
+    			zipFilePath = h.image.path(:large)
+	    		diskFilePath = File.join( Rails.public_path, zipFilePath )
+		      zipFilePath = File.basename(zipFilePath)
+		      io.get_output_stream(zipFilePath) { |f| 
+		      	f.print(File.open(diskFilePath, "rb").read())
 		    	}
 		    }
 		    io.close();
