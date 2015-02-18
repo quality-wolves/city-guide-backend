@@ -4,11 +4,8 @@ require 'zip'
 namespace :zip do
 	
   task :clean_attachments do
-    archive_path = File.join( Rails.public_path , 'archive');
-    archive_db_path = File.join( archive_path , 'db');
-
-    Dir.mkdir archive_path unless Dir.exists? archive_path
-    Dir.mkdir archive_db_path unless Dir.exists? archive_db_path
+    archive_path = Rails.configuration.archive_path
+    archive_db_path = Rails.configuration.archive_db_path
 
     Dir[ File.join(archive_path,'*_attachments.zip') ].each{ |f|
       File.delete(f) if ((Time.now - File.atime(f))/ 3600).round > 1
@@ -23,11 +20,8 @@ namespace :zip do
 
   #00 00 * * * /bin/bash -l -c 'rake zip:db_backup >> /var/log/city-guide/backup.log 2>&1'
   task :db_backup => :environment do
-    archive_path = File.join( Rails.public_path , 'archive');
-    archive_db_path = File.join( archive_path , 'db');
-
-    Dir.mkdir archive_path unless Dir.exists? archive_path
-    Dir.mkdir archive_db_path unless Dir.exists? archive_db_path
+    archive_path = Rails.configuration.archive_path
+    archive_db_path = Rails.configuration.archive_db_path
 
     io = Zip::File.open( File.join(archive_db_path,"#{Time.now}.zip"), Zip::File::CREATE)
     io.get_output_stream( "db.sqlite3" ) { |f| 
