@@ -15,4 +15,8 @@
   = image_tag @hotspot.image.url(:medium).gsub(/^\w+/, ''), class: 'col-md-3'
   = image_tag @hotspot.aditionnal_image1.url(:small).gsub(/^\w+/, ''), class: 'col-md-1' if @hotspot.aditionnal_image1.exists?
   = image_tag @hotspot.aditionnal_image2.url(:small).gsub(/^\w+/, ''), class: 'col-md-1' if @hotspot.aditionnal_image2.exists?
+  %p.col-md-9=@hotspot.address
+  %p.col-md-9=@hotspot.phone
+  %a.col-md-9{href:@hotspot.site}
+    ='url'
   %p.col-md-9=@hotspot.description
