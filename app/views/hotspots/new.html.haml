@@ -34,6 +34,23 @@
         - if !@error.empty?
           %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
         =f.text_field :name, class: 'form-control input-medium'
+
+    - @error = @hotspot.errors.any? && @hotspot.errors[:phone].any? ? @hotspot.errors[:phone] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :phone
+      .input-group.input-icon.right
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.telephone_field :phone, class: 'form-control input-medium'
+
+    - @error = @hotspot.errors.any? && @hotspot.errors[:site].any? ? @hotspot.errors[:site] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :site
+      .input-group.input-icon.right
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.url_field :site, class: 'form-control input-medium'
+
     - @error = @hotspot.errors.any? && @hotspot.errors[:description].any? ? @hotspot.errors[:description] : ''
     %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
       = f.label :description
@@ -41,12 +58,13 @@
         - if !@error.empty?
           %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
         =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
+    
     .form-group
-      %label='Address'
+      = f.label :address
       .map-wrapper{:style=>'width:100%;height:500px',:data =>{:zoom=>{:control=>"true","control-options"=>"{\"style\":\"maps.ZoomControlStyle.MEDIUM\",\"position\":\"maps.ControlPosition.LEFT_TOP\"}"},:custom=>{:controls=>'[{"type":"searchInput","selector":".search","position":"TOP_LEFT"}]',:center=>[@hotspot.lat,@hotspot.lng].to_json}}}
         .map{:style=>'width:100%;height:100%'}
         .input-icon.right.search{:style=>'width: 100%;'}
-          %input.form-control.col-md-12{ :data => {:components => '{"latSelector":"[role=\"lat\"]","lngSelector":"[role=\"lng\"]"}' }, :type => 'text', :maxlength => '512', :autocomplete => 'off' }
+          =f.text_field :address, {:class => 'form-control col-md-12', :data => {:components => {latSelector:"[role=\"lat\"]",lngSelector:"[role=\"lng\"]"}.to_json }, :maxlength => '512', :autocomplete => 'off' }
           = f.hidden_field :lat, role: 'lat'
           = f.hidden_field :lng, role: 'lng'
   .form-actions
