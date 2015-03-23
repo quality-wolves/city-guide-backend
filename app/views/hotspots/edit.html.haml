@@ -48,7 +48,7 @@
       .input-group.input-icon.right
         - if !@error.empty?
           %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.url_field :site, class: 'form-control input-medium'
+        =f.text_field :site, class: 'form-control input-medium'
 
     - @error = @hotspot.errors.any? && @hotspot.errors[:description].any? ? @hotspot.errors[:description] : ''
     %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
