@@ -9,7 +9,7 @@ class HotspotsController < ApplicationController
   end
 
   def list
-    @hotspots = Hotspot.where(category: params[:category]).entries
+    @hotspots = Hotspot.where(category: params[:category]).order(is_primary:'desc',created_at:'desc')
   end
 
   # GET /hotspots/1
@@ -78,10 +78,10 @@ class HotspotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_params
-      params.require(:hotspot).permit(:category, :name, :phone, :site, :description, :lat, :lng, :address, :image, :aditionnal_image1, :aditionnal_image2)
+      params.require(:hotspot).permit(:category, :is_primary, :name, :phone, :site, :description, :lat, :lng, :address, :image, :aditionnal_image1, :aditionnal_image2)
     end
 
     def update_params
-      params.require(:hotspot).permit(:name, :phone, :site, :description, :lat, :lng, :address, :image, :aditionnal_image1, :aditionnal_image2)
+      params.require(:hotspot).permit(:name, :is_primary, :phone, :site, :description, :lat, :lng, :address, :image, :aditionnal_image1, :aditionnal_image2)
     end
 end
