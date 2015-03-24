@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323213750) do
+ActiveRecord::Schema.define(version: 20150324195221) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20150323213750) do
   create_table "hotspots", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.float    "lat"
     t.float    "lng"
     t.text     "category"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150323213750) do
     t.string   "phone"
     t.string   "site"
     t.string   "address"
+    t.boolean  "is_primary",                     default: false
   end
 
   create_table "whats_ons", force: :cascade do |t|
