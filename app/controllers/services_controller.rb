@@ -2,7 +2,8 @@ class ServicesController < ApplicationController
 	before_filter :authenticate
 	
 	def is_updated
-		@count = Hotspot.where("updated_at > ?",params[:date]).count
+		d = DateTime.strptime(params[:date], '%Y-%m-%d %H:%M:%S') + 1.seconds
+		@count = Hotspot.where("updated_at > ?",d).count
 	end
 
 	def get_attachments_that_has_loaded_after
