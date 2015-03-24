@@ -35,6 +35,7 @@ class ServicesController < ApplicationController
 	def publish_db
 		require 'rake'
 		CityGuide::Application.load_tasks
+		Rake::Task['zip:db_backup'].reenable
 		Rake::Task['zip:db_backup'].invoke
 		flash[:notice] = sprintf("Database is published now")
     redirect_to :back
