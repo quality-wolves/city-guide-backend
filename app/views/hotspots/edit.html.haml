@@ -34,6 +34,14 @@
           %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
         =f.text_field :name, class: 'form-control input-medium'
 
+    - @error = @hotspot.errors.any? && @hotspot.errors[:is_primary].any? ? @hotspot.errors[:is_primary] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      = f.label :is_primary
+      .input-group.input-icon.right
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.check_box :is_primary, class: 'icheck'
+
     - @error = @hotspot.errors.any? && @hotspot.errors[:phone].any? ? @hotspot.errors[:phone] : ''
     %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
       = f.label :phone
