@@ -45,6 +45,8 @@ class Hotspot < ActiveRecord::Base
     :presence => true,
     :inclusion => { :in => self.categories }
 
+  before_save :update_rimary, :if => :is_set_primay
+
 #crop params accessors
   # attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
@@ -82,6 +84,14 @@ class Hotspot < ActiveRecord::Base
   private
     def reprocess_banner
       banner.reprocess!
+    end
+
+    def is_set_primay
+      @this.is_primary && (@this.new_record? || @this.is_primary_changed?)
+    end
+
+    def update_rimary
+      Hotspots.update_all({is_primary:false},{category:@this.category})
     end
 
 end
