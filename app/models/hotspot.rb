@@ -45,7 +45,7 @@ class Hotspot < ActiveRecord::Base
     :presence => true,
     :inclusion => { :in => self.categories }
 
-  before_save :update_rimary, :if => :is_set_primay
+  before_save :update_primary, :if => :is_set_primay
 
 #crop params accessors
   # attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
@@ -87,11 +87,11 @@ class Hotspot < ActiveRecord::Base
     end
 
     def is_set_primay
-      @this.is_primary && (@this.new_record? || @this.is_primary_changed?)
+      is_primary && (new_record? || is_primary_changed?)
     end
 
-    def update_rimary
-      Hotspots.update_all({is_primary:false},{category:@this.category})
+    def update_primary
+      Hotspot.where('category =?', category).update_all(is_primary: false)
     end
 
 end
