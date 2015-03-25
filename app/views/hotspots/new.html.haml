@@ -2,70 +2,15 @@
   =sprintf("New \"%s\" Hotspot", params[:category].capitalize)
 =form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspots_path do |f|
   = f.hidden_field :category, value: params[:category]
-  .form-body  
-    - @error = @hotspot.errors.any? && @hotspot.errors[:image].any? ? @hotspot.errors[:image] : ''
-    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-      = f.label :image
-      .input-group.input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.file_field :image
-
-    - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image1].any? ? @hotspot.errors[:aditionnal_image1] : ''
-    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-      = f.label :aditionnal_image1
-      .input-group.input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.file_field :aditionnal_image1
-
-    - @error = @hotspot.errors.any? && @hotspot.errors[:aditionnal_image2].any? ? @hotspot.errors[:aditionnal_image2] : ''
-    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-      = f.label :aditionnal_image2
-      .input-group.input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.file_field :aditionnal_image2
-
-    - @error = @hotspot.errors.any? && @hotspot.errors[:name].any? ? @hotspot.errors[:name] : ''
-    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-      = f.label :name
-      .input-group.input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.text_field :name, class: 'form-control input-medium'
-
-    - @error = @hotspot.errors.any? && @hotspot.errors[:is_primary].any? ? @hotspot.errors[:is_primary] : ''
-    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-      = f.label :is_primary
-      .input-group.input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.check_box :is_primary, class: 'icheck'
-
-    - @error = @hotspot.errors.any? && @hotspot.errors[:phone].any? ? @hotspot.errors[:phone] : ''
-    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-      = f.label :phone
-      .input-group.input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.telephone_field :phone, class: 'form-control input-medium'
-
-    - @error = @hotspot.errors.any? && @hotspot.errors[:site].any? ? @hotspot.errors[:site] : ''
-    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-      = f.label :site
-      .input-group.input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.text_field :site, class: 'form-control input-medium'
-
-    - @error = @hotspot.errors.any? && @hotspot.errors[:description].any? ? @hotspot.errors[:description] : ''
-    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-      = f.label :description
-      .input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        =f.text_area :description, class: 'form-control col-md-12', style: 'resize: vertical'
+  .form-body
+    = render partial: "input", locals: {model:@hotspot,form:f,method:"file_field",field_name:"image"}
+    = render partial: "input", locals: {model:@hotspot,form:f,method:"file_field",field_name:"aditionnal_image1"}
+    = render partial: "input", locals: {model:@hotspot,form:f,method:"file_field",field_name:"aditionnal_image2"}
+    = render partial: "input", locals: {model:@hotspot,form:f,method:"text_field",field_name:"name",options:{class: 'form-control input-medium'}}
+    = render partial: "input", locals: {model:@hotspot,form:f,method:"check_box",field_name:"is_primary",options:{class: 'icheck'}}
+    = render partial: "input", locals: {model:@hotspot,form:f,method:"telephone_field",field_name:"phone",options:{class: 'form-control input-medium'}}
+    = render partial: "input", locals: {model:@hotspot,form:f,method:"text_field",field_name:"site",options:{class: 'form-control input-medium'}}
+    = render partial: "input", locals: {model:@hotspot,form:f,method:"text_area",field_name:"description",options:{class: 'form-control col-md-12', style: 'resize: vertical'}}
     
     .form-group
       = f.label :address

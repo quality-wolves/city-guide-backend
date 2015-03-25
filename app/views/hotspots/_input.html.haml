@@ -1,0 +1,10 @@
+- if !defined? options
+  - options = {}
+
+- @error = model.errors.any? && model.errors[field_name].any? ? model.errors[field_name] : ''
+%div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+  =form.label field_name
+  .input-group.input-icon.right
+    - if !@error.empty?
+      %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+    =form.send(method,field_name,options)
