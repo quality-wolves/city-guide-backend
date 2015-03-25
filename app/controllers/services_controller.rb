@@ -2,8 +2,14 @@ class ServicesController < ApplicationController
 	before_filter :authenticate
 	
 	def is_updated
-		d = DateTime.strptime(params[:date], '%Y-%m-%d %H:%M:%S') + 1.seconds
-		@count = Hotspot.where("updated_at > ?",d).count
+		after_date = DateTime.strptime(params[:date], '%Y-%m-%d %H:%M:%S') + 1.seconds
+		back_up = Dir[ File.join( Rails.configuration.archive_db_path, '*' ) ].max { |a,b| File.ctime(a) <=> File.ctime(b) }
+		last_date = File.ctime(back_up)
+		if(last_date < after_date)
+			@count = 0
+		else
+			@count = Hotspot.where(updated_at: after_date..last_date).count
+		end
 	end
 
 	def get_attachments_that_has_loaded_after
@@ -44,12 +50,15 @@ class ServicesController < ApplicationController
 	protected
 
 	def authenticate
-		authenticate_admin! if action_name == 'publish_db'
-    authenticate_or_request_with_http_basic do |username, password|
-      if( admin = Admin.find_by_email(username) )
-      	admin.valid_password?(password)
-      end
-    end
+		if action_name == 'publish_db'
+			authenticate_admin! 
+		else
+	    authenticate_or_request_with_http_basic do |username, password|
+	      if( admin = Admin.find_by_email(username) )
+	      	admin.valid_password?(password)
+	      end
+	    end
+	  end
 	end
 
 end
