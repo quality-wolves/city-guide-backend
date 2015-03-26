@@ -38,6 +38,9 @@ class Hotspot < ActiveRecord::Base
         'Do'
     end
   end
+
+  has_many :hotspot_images, :dependent => :destroy
+  accepts_nested_attributes_for :hotspot_images, :reject_if => :all_blank, :allow_destroy => true
   
   validates :name, :presence => true
   validates :image, :presence => true
@@ -46,40 +49,6 @@ class Hotspot < ActiveRecord::Base
     :inclusion => { :in => self.categories }
 
   before_save :update_primary, :if => :is_set_primay
-
-#crop params accessors
-  # attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
-#banner iamge processing
-  #validates :banner, :presence => true
-  
-  has_attached_file :image, 
-                    :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
-                    :path => 'uploads/:class-:id-:basename-:style.:extension'
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
-
-  has_attached_file :aditionnal_image1, 
-                    :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
-                    :path => 'uploads/:class-:id-:basename-:style.:extension'
-  validates_attachment_content_type :aditionnal_image1, :content_type => /\Aimage\/.*\Z/
-
-  has_attached_file :aditionnal_image2, 
-                    :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
-                    :path => 'uploads/:class-:id-:basename-:style.:extension'
-  validates_attachment_content_type :aditionnal_image2, :content_type => /\Aimage\/.*\Z/
-  
-  # validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
-  
-  #after_update :reprocess_banner, :if => :cropping?
-  
-  # def cropping?(param = nil)
-  #   !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
-  # end
-  
-  # def banner_geometry(style = :original)
-  #   @geometry ||= {}
-  #   @geometry[style] ||= Paperclip::Geometry.from_file(banner.path(style))
-  # end
   
   private
     def reprocess_banner
