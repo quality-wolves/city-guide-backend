@@ -1,11 +1,16 @@
 %h3.page-title 
   =sprintf("New \"%s\" Hotspot", params[:category].capitalize)
-=form_for :hotspot, :html => { :multipart => true, :role => "form" }, url: hotspots_path do |f|
+= simple_form_for @hotspot, :html => { :multipart => true, :role => "form" }, url: hotspots_path do |f|
   = f.hidden_field :category, value: params[:category]
   .form-body
-    = render partial: "input", locals: {model:@hotspot,form:f,method:"file_field",field_name:"image"}
-    = render partial: "input", locals: {model:@hotspot,form:f,method:"file_field",field_name:"aditionnal_image1"}
-    = render partial: "input", locals: {model:@hotspot,form:f,method:"file_field",field_name:"aditionnal_image2"}
+    .col-md-12
+      - f.simple_fields_for :hotspot_images do |image|
+        = render 'hotspot_image_fields', :f => image
+    .links
+      = link_to_add_association f, :hotspot_images, :class => 'btn btn-success' do
+        %i.fa.fa-plus
+        %span
+          ='add image'
     = render partial: "input", locals: {model:@hotspot,form:f,method:"text_field",field_name:"name",options:{class: 'form-control input-medium'}}
     = render partial: "input", locals: {model:@hotspot,form:f,method:"check_box",field_name:"is_primary",options:{class: 'icheck'}}
     = render partial: "input", locals: {model:@hotspot,form:f,method:"telephone_field",field_name:"phone",options:{class: 'form-control input-medium'}}
