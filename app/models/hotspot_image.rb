@@ -11,6 +11,7 @@ class HotspotImage < ActiveRecord::Base
                     :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'},
                     :path => 'uploads/:class-:id-:basename-:style.:extension'
   	validates_attachment_content_type :file, :content_type => /\Aimage\/.*\Z/
+  	#crop_attached_file :avatar
 
 # validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
   

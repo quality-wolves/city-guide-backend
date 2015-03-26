@@ -31,7 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
+group :development, :test, :local do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -50,6 +50,7 @@ gem 'fog'
 #images
 gem 'paperclip'
 gem 'papercrop'
+gem 'cocaine'
 
 gem 'haml'
 gem 'pace-rails'
@@ -60,4 +61,4 @@ gem 'rubyzip'
 #nested forms
 gem 'formtastic'
 gem 'simple_form'
-gem "cocoon"
+gem 'cocoon'

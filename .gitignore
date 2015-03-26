@@ -29,3 +29,4 @@ config/environments/local.rb
 
 /archive/*
 !/archive/.keep
+vendor/cache/*
