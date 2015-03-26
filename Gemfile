@@ -47,10 +47,17 @@ gem 'devise'
 gem 'rmagick'
 gem 'fog'
 
+#images
 gem 'paperclip'
 gem 'papercrop'
+
 gem 'haml'
 gem 'pace-rails'
 
 #zip gem
 gem 'rubyzip'
+
+#nested forms
+gem 'formtastic'
+gem 'simple_form'
+gem "cocoon"
