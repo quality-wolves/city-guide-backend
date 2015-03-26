@@ -1,0 +1,12 @@
+.nested-fields
+  - @error = f.object.errors.any? && f.object.errors['file'].any? ? f.object.errors['file'] : ''
+  %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+    =f.label :file
+    .input-group.input-icon.right
+      - if !@error.empty?
+        %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+      =f.file_field :file
+      = link_to_remove_association f, :class => 'btn btn-default' do
+        %i.fa.fa-minus
+        %span
+          ='remove image'
