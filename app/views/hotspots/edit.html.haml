@@ -3,6 +3,8 @@
 =simple_form_for @hotspot, :html => { :multipart => true, :role => "form" }, url: hotspot_path(@hotspot), method: :patch do |f|
   .form-body  
     .col-md-12
+      - f.simple_fields_for @hotspot.hotspot_images do |image|
+        = render 'hotspot_image_fields', :f => image
       - f.simple_fields_for :hotspot_images do |image|
         = render 'hotspot_image_fields', :f => image
     .links

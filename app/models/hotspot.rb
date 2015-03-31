@@ -41,9 +41,15 @@ class Hotspot < ActiveRecord::Base
 
   has_many :hotspot_images, :dependent => :destroy
   accepts_nested_attributes_for :hotspot_images, :reject_if => :all_blank, :allow_destroy => true
+
+  has_attached_file :image, :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'}, :path => 'uploads/:class-:id-:basename-:style.:extension'
+  has_attached_file :aditionnal_image1, :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'}, :path => 'uploads/:class-:id-:basename-:style.:extension'
+  has_attached_file :aditionnal_image2, :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'}, :path => 'uploads/:class-:id-:basename-:style.:extension'
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :aditionnal_image1, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :aditionnal_image2, :content_type => /\Aimage\/.*\Z/
   
   validates :name, :presence => true
-  validates :image, :presence => true
   validates :category, 
     :presence => true,
     :inclusion => { :in => self.categories }
@@ -51,10 +57,6 @@ class Hotspot < ActiveRecord::Base
   before_save :update_primary, :if => :is_set_primay
   
   private
-    def reprocess_banner
-      banner.reprocess!
-    end
-
     def is_set_primay
       is_primary && (new_record? || is_primary_changed?)
     end

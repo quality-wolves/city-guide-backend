@@ -1,4 +1,6 @@
 class HotspotImage < ActiveRecord::Base
+	include Paperclip::Glue
+
 	belongs_to :hotspot
 
 #crop params accessors
