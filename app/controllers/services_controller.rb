@@ -2,14 +2,7 @@ class ServicesController < ApplicationController
 	before_filter :authenticate
 	
 	def is_updated
-		after_date = DateTime.strptime(params[:date], '%Y-%m-%d %H:%M:%S') + 1.seconds
-		back_up = Dir[ File.join( Rails.configuration.archive_db_path, '*' ) ].max { |a,b| File.ctime(a) <=> File.ctime(b) }
-		last_date = File.ctime(back_up)
-		if(last_date < after_date)
-			@count = 0
-		else
-			@count = Hotspot.where(updated_at: after_date..last_date).count
-		end
+		@count = modified_hotspots.count
 	end
 
 	def get_attachments_that_has_loaded_after
@@ -20,12 +13,12 @@ class ServicesController < ApplicationController
 
 		unless File.exist?(outputFile)
 			io = Zip::File.open( outputFile, Zip::File::CREATE);
-	    Hotspot.where("image_updated_at > ?",params[:date]).each { |h|
-  			zipFilePath = h.image.path(:large)
-	      io.get_output_stream( File.basename(zipFilePath) ) { |f| 
+	    modified_hotspots.each do |h|
+  			zipFilePath = h.hotspot_images[0].path(:large)
+	      io.get_output_stream( File.basename(zipFilePath) ) do |f| 
 	      	f.print( File.open( File.join( Rails.public_path, zipFilePath ) ,"rb" ).read() )
-	    	}
-	    }
+	    	end
+	    end
 	    io.close();
 	    File.chmod 0644, outputFile 
 		end
@@ -59,6 +52,16 @@ class ServicesController < ApplicationController
 	      end
 	    end
 	  end
+	end
+
+	def modified_hotspots
+		after_date = DateTime.strptime(params[:date], '%Y-%m-%d %H:%M:%S') + 1.seconds
+		back_up = Dir[ File.join( Rails.configuration.archive_db_path, '*' ) ].max { |a,b| File.ctime(a) <=> File.ctime(b) }
+		last_date = File.ctime(back_up)
+		if(last_date < after_date)
+			return []
+		end
+		return Hotspot.where(updated_at: after_date..last_date)
 	end
 
 end

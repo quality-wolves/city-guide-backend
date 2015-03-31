@@ -3,9 +3,8 @@
 = simple_form_for @hotspot, :html => { :multipart => true, :role => "form" }, url: hotspots_path do |f|
   = f.hidden_field :category, value: params[:category]
   .form-body
-    .col-md-12
-      - f.simple_fields_for :hotspot_images do |image|
-        = render 'hotspot_image_fields', :f => image
+    - f.simple_fields_for :hotspot_images do |image|
+      = render 'hotspot_image_fields', :f => image
     .links
       = link_to_add_association f, :hotspot_images, :class => 'btn btn-success' do
         %i.fa.fa-plus
