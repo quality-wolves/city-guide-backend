@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330143716) do
+ActiveRecord::Schema.define(version: 20150331011027) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -44,31 +44,15 @@ ActiveRecord::Schema.define(version: 20150330143716) do
   create_table "hotspots", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.float    "lat"
     t.float    "lng"
     t.text     "category"
-    t.string   "banner_file_name"
-    t.string   "banner_content_type"
-    t.integer  "banner_file_size"
-    t.datetime "banner_updated_at"
-    t.string   "aditionnal_image1_file_name"
-    t.string   "aditionnal_image1_content_type"
-    t.integer  "aditionnal_image1_file_size"
-    t.datetime "aditionnal_image1_updated_at"
-    t.string   "aditionnal_image2_file_name"
-    t.string   "aditionnal_image2_content_type"
-    t.integer  "aditionnal_image2_file_size"
-    t.datetime "aditionnal_image2_updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
     t.string   "phone"
     t.string   "site"
     t.string   "address"
-    t.boolean  "is_primary",                     default: false
+    t.boolean  "is_primary",  default: false
   end
 
   create_table "whats_ons", force: :cascade do |t|
