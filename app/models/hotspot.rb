@@ -1,5 +1,4 @@
 class Hotspot < ActiveRecord::Base
-  include Paperclip::Glue
 
   def self.categories 
     [ 'stay', 'eat', 'buy', 'drink', 'see', 'do' ]
@@ -41,13 +40,6 @@ class Hotspot < ActiveRecord::Base
 
   has_many :hotspot_images, :dependent => :destroy
   accepts_nested_attributes_for :hotspot_images, :reject_if => :all_blank, :allow_destroy => true
-
-  has_attached_file :image, :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'}, :path => 'uploads/:class-:id-:basename-:style.:extension'
-  has_attached_file :aditionnal_image1, :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'}, :path => 'uploads/:class-:id-:basename-:style.:extension'
-  has_attached_file :aditionnal_image2, :styles => { :small => "100x100#", :medium => "275x275#", :large => '640x640#'}, :path => 'uploads/:class-:id-:basename-:style.:extension'
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
-  validates_attachment_content_type :aditionnal_image1, :content_type => /\Aimage\/.*\Z/
-  validates_attachment_content_type :aditionnal_image2, :content_type => /\Aimage\/.*\Z/
   
   validates :name, :presence => true
   validates :category, 
