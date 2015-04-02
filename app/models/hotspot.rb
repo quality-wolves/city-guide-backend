@@ -38,7 +38,7 @@ class Hotspot < ActiveRecord::Base
     end
   end
 
-  has_many :hotspot_images, :dependent => :destroy
+  has_many :hotspot_images, -> { order('position desc') }, :dependent => :destroy
   accepts_nested_attributes_for :hotspot_images, :reject_if => :all_blank, :allow_destroy => true
   
   validates :name, :presence => true

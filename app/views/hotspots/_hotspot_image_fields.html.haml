@@ -1,13 +1,17 @@
 .nested-fields
   - @error = f.object.errors.any? && f.object.errors['file'].any? ? f.object.errors['file'] : ''
   %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
-    =f.label :file
+    %label
+      = 'Image'
+      - if !f.object.new_record?
+        = image_tag f.object.file.url(:small).gsub(/^\w+/, ''), class: 'col-md-1', style:'width: 100%;padding: 0;'
     .input-group.input-icon.right
       - if !@error.empty?
         %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
       %a.btn.btn-default.input-small.file-input{href:'#',style:'position: relative;'}
         %i.fa.fa-file-image-o
         = f.file_field :file, {style:'opacity: 0; position: absolute; width: 100%; height: 100%; top: 0;left: 0;'}
-      %div
+      %span
         = link_to_remove_association f, :class => 'btn btn-danger btn-sm' do
           %i.fa.fa-trash
+  = render partial: "input", locals: {model:f.object,form:f,method:"text_field",field_name:"position",options:{class: 'form-control input-small'}}
