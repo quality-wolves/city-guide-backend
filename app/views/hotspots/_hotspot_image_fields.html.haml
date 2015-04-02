@@ -11,6 +11,7 @@
       %a.btn.btn-default.input-small.file-input{href:'#',style:'position: relative;'}
         %i.fa.fa-file-image-o
         = f.file_field :file, {style:'opacity: 0; position: absolute; width: 100%; height: 100%; top: 0;left: 0;'}
-      %div
+      %span
         = link_to_remove_association f, :class => 'btn btn-danger btn-sm' do
           %i.fa.fa-trash
+  = render partial: "input", locals: {model:f.object,form:f,method:"text_field",field_name:"position",options:{class: 'form-control input-small'}}
