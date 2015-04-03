@@ -15,7 +15,6 @@
             %i.fa.fa-plus
             %span
               ='add image'
-      }
     = render partial: "input", locals: {model:@hotspot,form:f,method:"text_field",field_name:"name",options:{class: 'form-control input-medium'}}
     = render partial: "input", locals: {model:@hotspot,form:f,method:"check_box",field_name:"is_primary",options:{class: 'icheck'}}
     = render partial: "input", locals: {model:@hotspot,form:f,method:"telephone_field",field_name:"phone",options:{class: 'form-control input-medium'}}

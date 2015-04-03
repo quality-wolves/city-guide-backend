@@ -60,7 +60,7 @@
 
   S.onAppend = function(item){
     var $item = $(item), $p = $item.prev();
-    S.setPosition.call($item, !$p.length ? 0 : $p.data('s').position + 1);
+    S.setPosition.call($item.get(0), !$p.length ? 0 : $p.data('s').position + 1);
   };
 
   App.ready(function(){
