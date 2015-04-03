@@ -4,12 +4,17 @@
     - @error = @whatsOn.errors.any? && @whatsOn.errors[:image].any? ? @whatsOn.errors[:image] : ''
     %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
       = f.label :image
-      .input-group.input-icon.right
-        - if !@error.empty?
-          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
-        %a.btn.btn-default.input-small.file-input{href:'#',style:'position: relative;'}
-          %i.fa.fa-file-image-o
-          = f.file_field :image, {style:'opacity: 0; position: absolute; width: 100%; height: 100%; top: 0;left: 0;'}
+      .gallery.container-fluid
+        .row.input-group.input-icon.right
+          .col-sm-2
+            %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+              .input-group.input-icon.right
+                - if !@error.empty?
+                  %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+                %span.btn.btn-default.input-small.file-input
+                  .input
+                    = image_tag @whatsOn.image.url(:medium).gsub(/^\w+/, ''), style:'width: 100%;'
+                    = f.file_field :image, {role:'image',data:{'image-selector' => "i.fa.fa-file-image-o,img"}}
     - @error = @whatsOn.errors.any? && @whatsOn.errors[:title].any? ? @whatsOn.errors[:title] : ''
     %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
       = f.label :title
