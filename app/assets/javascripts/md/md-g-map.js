@@ -20,7 +20,21 @@
         GMap.super( this, 'constructor', jQ, options );
         this.createMap();
         this.initCustomControl();
+        this._readyCbChain = new App.mdClasses.MDCallbackChain();
+        this._isLoaded = false;
     }
+
+    GMap.prototype.onReady = function(cb){
+        this._readyCbChain.push(cb);
+        if(this._isLoaded){
+            this._triggerReady();
+        }
+    };
+
+    GMap.prototype._triggerReady = function(){
+        this._readyCbChain.exec( false ).clear();
+        this._isLoaded = true;
+    };
 
     GMap.prototype.createMap = function ( position ) {
         this.options.center = position ?
@@ -30,6 +44,8 @@
         this.map = this.$.find( '.map' );
         this.prepareOptions();
         this.map = new api.Map( this.map.get( 0 ), this.options );
+        this._triggerReady = this._triggerReady.bind(this);
+        api.event.addListenerOnce(this.map, 'idle', this._triggerReady);
     };
 
     GMap.prototype.prepareOptions = function(){

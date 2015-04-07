@@ -11,9 +11,9 @@
         targetSelector          : '.map-wrapper',
         name                    : 'geolocationMapController',
         dataKey                 : 'geolocationMap',
-        initStartPoint:function(widget){
-            widget.updateMarker(widget.map.options.center);
-            widget.map.geocode( {location: widget.map.options.center}, widget.onAfterGocode );
+        initStartPoint:function(){
+            this.updateMarker(this.map.options.center);
+            this.map.geocode( {location: this.map.options.center}, this.onAfterGocode );
         }
     });
 
@@ -26,7 +26,7 @@
             initMap().
             initAutocomplete().
             initAddressInput();
-        App.setTimeout(this.initStartPoint,500,widget);
+        widget.map.onReady(new App.mdClasses.MDCallback(true, this.initStartPoint, widget));
     } );
 
 })(App.jQuery);
@@ -47,10 +47,7 @@
     };
 
     prototype.initAutocomplete = function(){
-        App.setTimeout( function (self) {
-            self.autocomplete = new App.mdWidgets.AutocompleteInput(self.map.$searchInput.find('.form-control'));
-            self.autocomplete.$.on('place_changed',{self:self},self.onPlaceChanged);
-        }, 550, this);
+        this.map.onReady(new App.mdClasses.MDCallback(true, this._initAutocomplete, this));
         return this;
     };
 
@@ -114,6 +111,11 @@
 
     prototype.onAfterGocode = function( result ){
         this.autocomplete.setPlace(result[0]);
+    };
+
+    prototype._initAutocomplete = function(){
+        this.autocomplete = new App.mdWidgets.AutocompleteInput(this.map.$searchInput.find('.form-control'));
+        this.autocomplete.$.on('place_changed',{self:this},this.onPlaceChanged);
     };
 
 })( App.mdPlugins.geolocationMapController.settings.baseClass.prototype );

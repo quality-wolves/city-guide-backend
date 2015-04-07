@@ -42,8 +42,9 @@
         return new App.mdClasses.MDCallback( args.length == 1 ? args[0] : args );
     };
 
-    CallbackChain.prototype.push = function () {
-        CallbackChain.super( this, 'push', this._createItem( arguments ) );
+    CallbackChain.prototype.push = function (cb) {
+        cb = cb instanceof App.mdClasses.MDCallback ? cb : this._createItem( arguments );
+        CallbackChain.super( this, 'push', cb );
         return this;
     };
 
