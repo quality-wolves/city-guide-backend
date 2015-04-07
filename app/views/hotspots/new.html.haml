@@ -19,7 +19,14 @@
     = render partial: "input", locals: {model:@hotspot,form:f,method:"check_box",field_name:"is_primary",options:{class: 'icheck'}}
     = render partial: "input", locals: {model:@hotspot,form:f,method:"telephone_field",field_name:"phone",options:{class: 'form-control input-medium'}}
     = render partial: "input", locals: {model:@hotspot,form:f,method:"text_field",field_name:"site",options:{class: 'form-control input-medium'}}
-    = render partial: "input", locals: {model:@hotspot,form:f,method:"text_area",field_name:"description",options:{class: 'form-control col-md-12', style: 'resize: vertical'}}
+
+    - @error = @hotspot.errors.any? && @hotspot.errors[:description].any? ? @hotspot.errors[:description] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      =f.label :description
+      .input-group.input-icon.right.col-md-12
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.text_area :description, class: 'form-control', style: 'resize: vertical'
     
     .form-group
       = f.label :address
