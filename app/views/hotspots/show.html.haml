@@ -17,6 +17,8 @@
       %span{style:'position: absolute;color:white;right:40px;top:20px;text-shadow:1px 1px 2px black;'}
         %i.fa.fa-check{style:'font-size: 40px;'}
     = image_tag @hotspot.hotspot_images[0].file.url(:medium).gsub(/^\w+/, '') if @hotspot.hotspot_images.any?
+    %p{style:'width: 275px;margin: 0;height: 75px;'}
+      = @hotspot.tagline
   - if (count = @hotspot.hotspot_images.count) > 1
     - @hotspot.hotspot_images.slice(1,count).each do |image|
       = image_tag image.file.url(:small).gsub(/^\w+/, ''), class: 'col-md-1'
