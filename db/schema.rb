@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402153914) do
+ActiveRecord::Schema.define(version: 20150416084115) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150402153914) do
     t.string   "site"
     t.string   "address"
     t.boolean  "is_primary",  default: false
+    t.string   "tagline"
   end
 
   create_table "whats_ons", force: :cascade do |t|
