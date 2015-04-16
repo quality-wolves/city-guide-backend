@@ -46,6 +46,8 @@ class Hotspot < ActiveRecord::Base
     :presence => true,
     :inclusion => { :in => self.categories }
 
+  validates_length_of :tagline, :maximum => 140, :allow_blank => true
+
   before_save :update_primary, :if => :is_set_primay
   
   private
