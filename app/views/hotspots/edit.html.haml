@@ -19,6 +19,14 @@
     = render partial: "input", locals: {model:@hotspot,form:f,method:"telephone_field",field_name:"phone",options:{class: 'form-control input-medium'}}
     = render partial: "input", locals: {model:@hotspot,form:f,method:"text_field",field_name:"site",options:{class: 'form-control input-medium'}}
 
+    - @error = @hotspot.errors.any? && @hotspot.errors[:tagline].any? ? @hotspot.errors[:tagline] : ''
+    %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+      =f.label :tagline
+      .input-group.input-icon.right.col-md-12
+        - if !@error.empty?
+          %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+        =f.text_area :tagline, class: 'form-control', style: 'resize: none'
+
     - @error = @hotspot.errors.any? && @hotspot.errors[:description].any? ? @hotspot.errors[:description] : ''
     %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
       =f.label :description
