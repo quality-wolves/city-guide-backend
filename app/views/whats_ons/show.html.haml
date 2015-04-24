@@ -1,6 +1,6 @@
 .portlet.box.blue-hoki
   .portlet-title
-    .caption= @whatsOn.title
+    .caption= @whatsOn.name
     .actions
       %a.btn.btn-default.btn-sm{href:edit_whats_on_path(@whatsOn)}
         %i.fa.fa-pencil
@@ -12,6 +12,18 @@
         %i.fa.fa-caret-left
         Back
 .col-md-12.col-sm-4
-  = image_tag @whatsOn.image.url(:medium).gsub(/^\w+/, ''), class: 'col-md-3'
-  %date.col-md-9=@whatsOn.date.strftime('%m/%d/%Y')
-  %p.col-md-9=@whatsOn.description
+  .col-md-4
+    -if @whatsOn.is_primary
+      %span{style:'position: absolute;color:white;right:40px;top:20px;text-shadow:1px 1px 2px black;'}
+        %i.fa.fa-check{style:'font-size: 40px;'}
+    = image_tag @whatsOn.whats_on_images[0].file.url(:medium).gsub(/^\w+/, '') if @whatsOn.whats_on_images.any?
+    %p{style:'width: 275px;margin: 0;height: 75px;'}
+      = @whatsOn.tagline
+  - if (count = @whatsOn.whats_on_images.count) > 1
+    - @whatsOn.whats_on_images.slice(1,count).each do |image|
+      = image_tag image.file.url(:small).gsub(/^\w+/, ''), class: 'col-md-1'
+  %p.col-md-8=@whatsOn.address
+  %p.col-md-8=@whatsOn.phone
+  %a.col-md-8{href:@whatsOn.site}
+    ='url'
+  %p.col-md-8=@whatsOn.description

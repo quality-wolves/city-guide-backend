@@ -1,0 +1,17 @@
+.nested-fields.col-sm-2
+  - @error = f.object.errors.any? && f.object.errors['file'].any? ? f.object.errors['file'] : ''
+  %div{:class => sprintf('form-group %s', !@error.empty? ? 'has-error' : '')}
+    .input-group.input-icon.right
+      - if !@error.empty?
+        %i.fa.fa-exclamation.tooltips{:data=>{:original=>{:title=>@error.join("\n")},:container=>"body"}}
+      %span.btn.btn-default.input-small.file-input
+        .input
+          - if !f.object.new_record?
+            = image_tag f.object.file.url(:medium).gsub(/^\w+/, ''), style:'width: 100%;'
+          - else
+            %i.fa.fa-file-image-o{style:'position: absolute;top: 45%;left: 48%;'}
+          = f.file_field :file, {role:'image',data:{'image-selector' => "i.fa.fa-file-image-o,img"}}
+        %i.fa.fa-arrows
+        = link_to_remove_association '', f, :class => 'fa fa-trash'
+  = f.hidden_field :position
+  = f.hidden_field :id
