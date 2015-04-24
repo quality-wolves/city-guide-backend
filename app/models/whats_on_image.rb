@@ -1,7 +1,7 @@
-class HotspotImage < ActiveRecord::Base
+class WhatsOnImage < ActiveRecord::Base
 	include Paperclip::Glue
 
-	belongs_to :hotspot
+	belongs_to :whatsOn
 
 #crop params accessors
   # attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
