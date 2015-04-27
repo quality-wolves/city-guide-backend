@@ -9,12 +9,12 @@ class ServicesController < ApplicationController
     end
   end
 
-  def get_hotspots_attachments_that_has_loaded_after
+  def get_attachments_that_has_loaded_after
     require 'rubygems'
     require 'zip'
     modified_hotspots
     archive_path = Rails.configuration.archive_path
-    outputFile = File.join( archive_path, "hotspot-images-attachments #{@after_date} <-> #{@last_date}.zip" )
+    outputFile = File.join( archive_path, "attachments #{@after_date} <-> #{@last_date}.zip" )
 
     unless File.exist?(outputFile)
       io = Zip::File.open( outputFile, Zip::File::CREATE);
@@ -24,24 +24,8 @@ class ServicesController < ApplicationController
           f.print( File.open( File.join( Rails.public_path, zipFilePath ) ,"rb" ).read() )
         end
       end
-      io.close();
-      File.chmod 0644, outputFile 
-    end
-    
-    send_file outputFile;
-  end
-
-  def get_whatsons_attachments_that_has_loaded_after
-    require 'rubygems'
-    require 'zip'
-    modified_hotspots
-    archive_path = Rails.configuration.archive_path
-    outputFile = File.join( archive_path, "whatson-images-attachments #{@after_date} <-> #{@last_date}.zip" )
-
-    unless File.exist?(outputFile)
-      io = Zip::File.open( outputFile, Zip::File::CREATE);
-      HotspotImage.where(file_updated_at: @after_date..@last_date).each do |h|
-        zipFilePath = h.file.path(:large)
+      WhatsOnImage.where(file_updated_at: @after_date..@last_date).each do |w|
+        zipFilePath = w.file.path(:large)
         io.get_output_stream( File.basename(zipFilePath) ) do |f| 
           f.print( File.open( File.join( Rails.public_path, zipFilePath ) ,"rb" ).read() )
         end

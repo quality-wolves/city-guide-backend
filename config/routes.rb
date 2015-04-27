@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   resources :whats_ons
 
   get 'is_updated/:date' => 'services#is_updated'
-  get 'get_hotspots_attachments_that_has_loaded_after/:date' => 'services#get_hotspots_attachments_that_has_loaded_after'
-  get 'get_whatsons_attachments_that_has_loaded_after/:date' => 'services#get_whatsons_attachments_that_has_loaded_after'
+  get 'get_attachments_that_has_loaded_after/:date' => 'services#get_attachments_that_has_loaded_after'
   get 'get_database' => 'services#get_database'
   get 'publish_db' => 'services#publish_db'
 
